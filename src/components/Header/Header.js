@@ -1,5 +1,5 @@
 import styles from "./Header.module.css";
-import { ReactComponent as Search } from "../../assets/img/icons.svg";
+import { ReactComponent as Search } from "../../assets/icons.svg";
 
 const Header = () => {
   return (
@@ -32,13 +32,13 @@ const Header = () => {
             className={styles["nav__user-img"]}
             alt=""
           />
-          <span>Abdulvokhid</span>
+          <span>Name</span>
         </a>
 
-        <button className={styles["nav__el"]}>Log in</button>
+        {/* <button className={styles["nav__el"]}>Log in</button>
         <button className={`${styles["nav__el"]} ${styles["nav__el--cta"]}`}>
           Sign up
-        </button>
+        </button> */}
       </nav>
     </header>
   );
