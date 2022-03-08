@@ -9,7 +9,7 @@ const Tours = () => {
   }
 
   return (
-    <main className={styles["main"]}>
+    <main className="main">
       <div className={styles["card-container"]}>{arr.map((arr) => arr)}</div>
     </main>
   );

@@ -13,7 +13,7 @@ const Card = () => {
           />
         </div>
 
-        <h3 className={styles["heading-tertirary"]}>
+        <h3 className="heading-tertirary">
           <span>The Forest Hiker</span>
         </h3>
       </div>

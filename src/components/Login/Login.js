@@ -2,10 +2,8 @@ import styles from "./Login.module.css";
 
 const Login = () => {
   return (
-    <main className={`${styles["main"]} ${styles["login-form"]}`}>
-      <h2 className={`${styles["heading-secondary"]} ${styles["ma-bt-lg"]}`}>
-        Log into your account
-      </h2>
+    <main className={`main ${styles["login-form"]}`}>
+      <h2 className="heading-secondary ma-bt-lg">Log into your account</h2>
       <form className={`${styles["form__group"]}`}>
         <label htmlFor="email" className={`${styles["form__label"]}`}>
           Email address
