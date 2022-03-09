@@ -5,10 +5,7 @@ const TourHeader = () => {
     <section className={styles["section-header"]}>
       <div className={styles["heading-box"]}>
         <h1 className="heading-primary">
-          <span>
-            The Park <br />
-            Camper Tour
-          </span>
+          <span>The Park Camper Tour</span>
         </h1>
         <div className={styles["heading-box__group"]}>
           <div className={styles["heading-box__detail"]}>

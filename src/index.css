@@ -307,3 +307,9 @@ code {
   outline: 3px solid #55c57a;
   outline-offset: 3px;
 }
+
+@media (max-width: 768px) {
+  html {
+    font-size: 45%;
+  }
+}
