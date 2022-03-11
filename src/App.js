@@ -15,8 +15,8 @@ function App() {
   return (
     <div className="App">
       <Header />
-      {/* <Tours />
-      <Login />
+      <Tours />
+      {/* <Login />
       <SignUp /> */}
       <TourHeader />
       <TourDescription />

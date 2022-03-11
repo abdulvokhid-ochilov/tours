@@ -1,6 +1,6 @@
-import styles from "./AccountContent.module.css";
+import styles from "./AccountSettings.module.css";
 
-const AccountContent = () => {
+const AccountSettings = () => {
   return (
     <div className={styles["user-view__content"]}>
       <div className={styles["user-view__form-container"]}>
@@ -108,4 +108,4 @@ const AccountContent = () => {
   );
 };
 
-export default AccountContent;
+export default AccountSettings;

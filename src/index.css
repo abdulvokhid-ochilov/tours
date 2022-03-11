@@ -12,6 +12,25 @@
   color: #fff;
 }
 
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: #f7f7f7;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #55c57a;
+  border-radius: 20px;
+  border: 6px solid transparent;
+  /* background-clip: content-box; */
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: #28b487;
+}
+
 *,
 *::before,
 *::after {
@@ -196,6 +215,8 @@ code {
 .btn,
 .btn:link,
 .btn:visited {
+  width: fit-content;
+  height: fit-content;
   font-size: 1.6rem;
   padding: 1.4rem 3rem;
   border-radius: 10rem;
@@ -246,6 +267,16 @@ code {
 }
 .btn--green::after {
   background-color: #55c57a;
+}
+
+.btn--delete {
+  background-color: #eb4d4b;
+  color: #fff;
+}
+
+.btn--delete:focus {
+  outline: none;
+  background-color: #ff7730;
 }
 
 .btn--small {

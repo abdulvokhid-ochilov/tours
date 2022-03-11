@@ -31,6 +31,14 @@ const AccountMenu = () => {
         <li>
           <a href="/">
             <svg>
+              <use href="img/icons.svg#icon-edit-3"></use>
+            </svg>
+            Leave a review
+          </a>
+        </li>
+        <li>
+          <a href="/">
+            <svg>
               <use href="img/icons.svg#icon-credit-card"></use>
             </svg>
             Billing

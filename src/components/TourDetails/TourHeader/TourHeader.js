@@ -3,6 +3,7 @@ import styles from "./TourHeader.module.css";
 const TourHeader = () => {
   return (
     <section className={styles["section-header"]}>
+      <div className={styles["card__picture-overlay"]}>&nbsp;</div>
       <div className={styles["heading-box"]}>
         <h1 className="heading-primary">
           <span>The Park Camper Tour</span>

@@ -1,13 +1,17 @@
 import styles from "./Account.module.css";
-import AccountContent from "./AccountContent/AccountContent";
+import AccountSettings from "./AccountSettings/AccountSettings";
 import AccountMenu from "./AccountMenu/AccountMenu";
+import AccountReviews from "./AccountReviews/AccountReviews";
+import AccountReview from "./AccountReview/AccountReview";
 
 const Account = () => {
   return (
     <main className="main">
       <div className={styles["user-view"]}>
         <AccountMenu />
-        <AccountContent />
+        {/* <AccountSettings /> */}
+        {/* <AccountReviews /> */}
+        <AccountReview />
       </div>
     </main>
   );
