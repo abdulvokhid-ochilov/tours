@@ -2,11 +2,9 @@ import styles from "./AccountReview.module.css";
 import { useState } from "react";
 
 const AccountReview = () => {
-  const [active, setActive] = useState("reviews__star--inactive");
   const [rate, setRate] = useState(0);
 
   const clickHandler = (e) => {
-    console.log(e.target.id);
     setRate(e.target.id);
   };
   return (

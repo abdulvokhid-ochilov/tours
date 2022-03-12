@@ -3,6 +3,8 @@ import AccountSettings from "./AccountSettings/AccountSettings";
 import AccountMenu from "./AccountMenu/AccountMenu";
 import AccountReviews from "./AccountReviews/AccountReviews";
 import AccountReview from "./AccountReview/AccountReview";
+import ManageTours from "./Admin/ManageTours/ManageTours";
+import CreateTour from "./Admin/CreateTour/CreateTour";
 
 const Account = () => {
   return (
@@ -11,7 +13,9 @@ const Account = () => {
         <AccountMenu />
         {/* <AccountSettings /> */}
         {/* <AccountReviews /> */}
-        <AccountReview />
+        {/* <AccountReview /> */}
+        {/* <ManageTours /> */}
+        <CreateTour />
       </div>
     </main>
   );

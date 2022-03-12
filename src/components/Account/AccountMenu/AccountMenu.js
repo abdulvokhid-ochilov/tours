@@ -58,6 +58,14 @@ const AccountMenu = () => {
             <li>
               <a href="/">
                 <svg>
+                  <use href="img/icons.svg#icon-map-pin"></use>
+                </svg>
+                Create a tour
+              </a>
+            </li>
+            <li>
+              <a href="/">
+                <svg>
                   <use href="img/icons.svg#icon-users"></use>
                 </svg>
                 Manage users
