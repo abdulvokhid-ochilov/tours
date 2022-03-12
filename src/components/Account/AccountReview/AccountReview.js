@@ -1,6 +1,14 @@
 import styles from "./AccountReview.module.css";
+import { useState } from "react";
 
 const AccountReview = () => {
+  const [active, setActive] = useState("reviews__star--inactive");
+  const [rate, setRate] = useState(0);
+
+  const clickHandler = (e) => {
+    console.log(e.target.id);
+    setRate(e.target.id);
+  };
   return (
     <div className={styles["user-view__content"]}>
       <div className={styles["user-view__form-container"]}>
@@ -31,6 +39,68 @@ const AccountReview = () => {
                 The city wanderer
               </option>
             </select>
+          </div>
+          <div className={`${styles["form__group"]} ma-bt-md"`}>
+            <label className={styles["form__label"]} htmlFor="rate">
+              Rate
+            </label>
+            <div className={styles["reviews__rating"]}>
+              <svg
+                className={`${styles["reviews__star"]} ${
+                  rate >= 1
+                    ? styles["reviews__star--active"]
+                    : styles["reviews__star--inactive"]
+                }`}
+                onClick={clickHandler}
+                id={1}
+              >
+                <use href="img/icons.svg#icon-star"></use>
+              </svg>
+              <svg
+                className={`${styles["reviews__star"]} ${
+                  rate >= 2
+                    ? styles["reviews__star--active"]
+                    : styles["reviews__star--inactive"]
+                }`}
+                onClick={clickHandler}
+                id={2}
+              >
+                <use href="img/icons.svg#icon-star"></use>
+              </svg>
+              <svg
+                className={`${styles["reviews__star"]} ${
+                  rate >= 3
+                    ? styles["reviews__star--active"]
+                    : styles["reviews__star--inactive"]
+                }`}
+                onClick={clickHandler}
+                id={3}
+              >
+                <use href="img/icons.svg#icon-star"></use>
+              </svg>
+              <svg
+                className={`${styles["reviews__star"]} ${
+                  rate >= 4
+                    ? styles["reviews__star--active"]
+                    : styles["reviews__star--inactive"]
+                }`}
+                onClick={clickHandler}
+                id={4}
+              >
+                <use href="img/icons.svg#icon-star"></use>
+              </svg>
+              <svg
+                className={`${styles["reviews__star"]} ${
+                  rate >= 5
+                    ? styles["reviews__star--active"]
+                    : styles["reviews__star--inactive"]
+                }`}
+                onClick={clickHandler}
+                id={5}
+              >
+                <use href="img/icons.svg#icon-star"></use>
+              </svg>
+            </div>
           </div>
           <div className={`${styles["form__group"]} ma-bt-md"`}>
             <label className={styles["form__label"]} htmlFor="feedback">
