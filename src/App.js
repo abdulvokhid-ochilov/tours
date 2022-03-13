@@ -18,12 +18,12 @@ function App() {
       {/* <Tours /> */}
       {/* <Login />
       <SignUp /> */}
-      {/* <TourHeader />
-      <TourDescription />
-      <TourPictures />
-      <TourMap />
+      {/* <TourHeader /> */}
+      {/* <TourDescription /> */}
+      {/* <TourPictures /> */}
+      {/* <TourMap /> */}
       <TourReviews />
-      <TourCTA /> */}
+      {/* <TourCTA /> */}
       <Account />
       <Footer />
     </div>

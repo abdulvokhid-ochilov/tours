@@ -5,6 +5,7 @@ import AccountReviews from "./AccountReviews/AccountReviews";
 import AccountReview from "./AccountReview/AccountReview";
 import ManageTours from "./Admin/ManageTours/ManageTours";
 import CreateTour from "./Admin/CreateTour/CreateTour";
+import ManageUsers from "./Admin/ManageUsers/ManageUsers";
 
 const Account = () => {
   return (
@@ -15,7 +16,8 @@ const Account = () => {
         {/* <AccountReviews /> */}
         {/* <AccountReview /> */}
         {/* <ManageTours /> */}
-        <CreateTour />
+        {/* <CreateTour /> */}
+        <ManageUsers />
       </div>
     </main>
   );
