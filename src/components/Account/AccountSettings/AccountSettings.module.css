@@ -4,6 +4,9 @@
   flex: 1;
   padding: 7rem 0;
   margin-left: 25rem;
+  height: 100vh;
+  overflow: hidden;
+  overflow-y: scroll;
 }
 .user-view__form-container {
   max-width: 68rem;
