@@ -339,8 +339,12 @@ code {
   outline-offset: 3px;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 800px) {
   html {
     font-size: 45%;
+  }
+
+  .main {
+    padding: 4rem 2rem;
   }
 }

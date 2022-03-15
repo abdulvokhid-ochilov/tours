@@ -3,6 +3,7 @@
   -ms-flex: 1;
   flex: 1;
   padding: 7rem;
+  margin-left: 25rem;
 }
 
 .form__input {
@@ -86,4 +87,11 @@
 }
 .reviews__star--inactive {
   fill: #bbb;
+}
+
+@media only screen and (max-width: 768px) {
+  .user-view__content {
+    margin-left: 5.5rem;
+    padding: 4rem 2rem;
+  }
 }

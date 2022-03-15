@@ -6,6 +6,7 @@
   overflow: hidden;
   height: 100vh;
   overflow-y: auto;
+  margin-left: 25rem;
 }
 
 .user-view__reviews {
@@ -119,4 +120,11 @@
 }
 .reviews__star--inactive {
   fill: #bbb;
+}
+
+@media only screen and (max-width: 768px) {
+  .user-view__content {
+    margin-left: 5.5rem;
+    padding: 4rem 2rem;
+  }
 }

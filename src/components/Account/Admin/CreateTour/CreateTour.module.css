@@ -6,6 +6,7 @@
   overflow: hidden;
   height: 100vh;
   overflow-y: auto;
+  margin-left: 25rem;
 }
 
 .admin-view__form-container {
@@ -127,4 +128,11 @@
   box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.15);
   -webkit-transform: translateY(-2px);
   transform: translateY(-2px);
+}
+
+@media only screen and (max-width: 768px) {
+  .admin-view__content {
+    margin-left: 5.5rem;
+    padding: 4rem 2rem;
+  }
 }

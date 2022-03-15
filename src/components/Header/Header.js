@@ -1,5 +1,4 @@
 import styles from "./Header.module.css";
-import { ReactComponent as Search } from "../../assets/icons.svg";
 
 const Header = () => {
   return (
@@ -10,7 +9,9 @@ const Header = () => {
         </a>
         <form className={styles.nav__search}>
           <button className={styles["nav__search-btn"]}>
-            <Search />
+            <svg>
+              <use href="img/icons.svg#icon-search"></use>
+            </svg>
           </button>
           <input
             type="text"
@@ -23,9 +24,6 @@ const Header = () => {
         <img src="./img/logo-white.png" alt="Natours logo" />
       </div>
       <nav className={`${styles["nav"]} ${styles["nav--user"]}`}>
-        <a href="/" className={styles["nav__el"]}>
-          My bookings
-        </a>
         <a href="/" className={styles["nav__el"]}>
           <img
             src="./img/users/user-5.jpg"

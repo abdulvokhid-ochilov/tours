@@ -12,12 +12,12 @@ const Account = () => {
     <main className="main">
       <div className={styles["user-view"]}>
         <AccountMenu />
-        {/* <AccountSettings /> */}
+        <AccountSettings />
         {/* <AccountReviews /> */}
         {/* <AccountReview /> */}
         {/* <ManageTours /> */}
         {/* <CreateTour /> */}
-        <ManageUsers />
+        {/* <ManageUsers /> */}
       </div>
     </main>
   );

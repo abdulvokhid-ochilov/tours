@@ -22,7 +22,7 @@ function App() {
       {/* <TourDescription /> */}
       {/* <TourPictures /> */}
       {/* <TourMap /> */}
-      <TourReviews />
+      {/* <TourReviews /> */}
       {/* <TourCTA /> */}
       <Account />
       <Footer />

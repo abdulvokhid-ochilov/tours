@@ -1,7 +1,4 @@
 .user-view__menu {
-  -webkit-box-flex: 32rem;
-  -ms-flex: 32rem 0 0px;
-  flex: 32rem 0 0;
   background-image: -webkit-gradient(
     linear,
     left top,
@@ -11,6 +8,10 @@
   );
   background-image: linear-gradient(to right bottom, #7dd56f, #28b487);
   padding: 4rem 0;
+  overflow: hidden;
+  width: 25rem;
+  position: absolute;
+  height: 100vh;
 }
 
 .side-nav {
@@ -32,6 +33,7 @@
 }
 .side-nav a:link,
 .side-nav a:visited {
+  min-width: 25rem;
   padding: 1rem 4rem;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -53,8 +55,10 @@
   transform: translateX(3px);
 }
 .side-nav svg {
-  height: 1.9rem;
-  width: 1.9rem;
+  min-height: 1.9rem;
+  min-width: 1.9rem;
+  max-height: 1.9rem;
+  max-width: 1.9rem;
   fill: #f7f7f7;
   margin-right: 2rem;
 }
@@ -69,4 +73,25 @@
   text-transform: uppercase;
   color: #f2f2f2;
   border-bottom: 1px solid currentColor;
+}
+
+@media only screen and (max-width: 768px) {
+  .user-view__menu {
+    width: 5.5rem;
+    transition: all 0.5s ease-in-out;
+    z-index: 100;
+  }
+
+  .user-view__menu:hover {
+    width: 25rem;
+    transition: all 0.5s ease-in-out;
+  }
+
+  .side-nav li {
+    margin: 0;
+  }
+  .side-nav a:link,
+  .side-nav a:visited {
+    padding: 1rem 2rem;
+  }
 }

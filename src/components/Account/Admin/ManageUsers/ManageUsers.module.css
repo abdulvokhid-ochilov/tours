@@ -6,12 +6,14 @@
   overflow: hidden;
   height: 100vh;
   overflow-y: auto;
+  margin-left: 25rem;
 }
 
 .users {
   display: flex;
   flex-wrap: wrap;
   gap: 2rem;
+  justify-content: center;
 }
 
 .user__card {
@@ -81,4 +83,11 @@
 .user__button {
   display: flex;
   padding-top: 1rem;
+}
+
+@media only screen and (max-width: 768px) {
+  .admin-view__content {
+    margin-left: 5.5rem;
+    padding: 4rem 2rem;
+  }
 }

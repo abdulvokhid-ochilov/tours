@@ -45,7 +45,6 @@ const AccountMenu = () => {
           </a>
         </li>
         <div className={styles["admin-nav"]}>
-          <h5 className={styles["admin-nav__heading"]}>Admin</h5>
           <ul className={styles["side-nav"]}>
             <li>
               <a href="/">

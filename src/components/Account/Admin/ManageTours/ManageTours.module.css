@@ -6,6 +6,7 @@
   overflow: hidden;
   height: 100vh;
   overflow-y: auto;
+  margin-left: 25rem;
 }
 
 .admin-view__tours {
@@ -90,4 +91,11 @@
   font-size: 1.4rem;
   display: flex;
   justify-content: space-between;
+}
+
+@media only screen and (max-width: 768px) {
+  .admin-view__content {
+    margin-left: 5.5rem;
+    padding: 4rem 2rem;
+  }
 }
