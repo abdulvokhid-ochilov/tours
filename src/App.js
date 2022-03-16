@@ -10,21 +10,37 @@ import TourMap from "./components/TourDetails/TourMap/TourMap";
 import TourReviews from "./components/TourDetails/TourReviews/TourReviews";
 import TourCTA from "./components/TourDetails/TourCTA/TourCTA";
 import Account from "./components/Account/Account";
+import { Routes, Route } from "react-router-dom";
+import Home from "./pages/Home";
+import SignUpPage from "./pages/SignUpPage";
 
 function App() {
   return (
     <div className="App">
       <Header />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<SignUp />} />
+        {/* <Route
+            path="/protected"
+            element={
+              <RequireAuth>
+                <ProtectedPage />
+              </RequireAuth>
+            }
+          /> */}
+      </Routes>
       {/* <Tours /> */}
-      {/* <Login />
-      <SignUp /> */}
+
+      {/* <SignUp /> */}
       {/* <TourHeader /> */}
       {/* <TourDescription /> */}
       {/* <TourPictures /> */}
       {/* <TourMap /> */}
       {/* <TourReviews /> */}
       {/* <TourCTA /> */}
-      <Account />
+      {/* <Account /> */}
       <Footer />
     </div>
   );
