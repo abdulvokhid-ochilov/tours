@@ -1,6 +1,10 @@
 import styles from "./Header.module.css";
+import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 
 const Header = () => {
+  const status = useSelector((state) => state.auth.loginStatus);
+
   return (
     <header className={styles["header"]}>
       <nav className={`${styles["nav"]} ${styles["nav--tours"]}`}>
@@ -24,19 +28,28 @@ const Header = () => {
         <img src="./img/logo-white.png" alt="Natours logo" />
       </div>
       <nav className={`${styles["nav"]} ${styles["nav--user"]}`}>
-        <a href="/" className={styles["nav__el"]}>
-          <img
-            src="./img/users/user-5.jpg"
-            className={styles["nav__user-img"]}
-            alt=""
-          />
-          <span>Name</span>
-        </a>
-
-        {/* <button className={styles["nav__el"]}>Log in</button>
-        <button className={`${styles["nav__el"]} ${styles["nav__el--cta"]}`}>
-          Sign up
-        </button> */}
+        {status ? (
+          <a href="/" className={styles["nav__el"]}>
+            <img
+              src="./img/users/user-5.jpg"
+              className={styles["nav__user-img"]}
+              alt=""
+            />
+            <span>Name</span>
+          </a>
+        ) : (
+          <>
+            <Link to="/login" className={styles["nav__el"]}>
+              Log in
+            </Link>
+            <Link
+              to="/signup"
+              className={`${styles["nav__el"]} ${styles["nav__el--cta"]}`}
+            >
+              Sign up
+            </Link>
+          </>
+        )}
       </nav>
     </header>
   );
