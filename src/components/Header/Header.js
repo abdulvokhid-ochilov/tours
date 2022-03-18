@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 
 const Header = () => {
   const status = useSelector((state) => state.auth.loginStatus);
+  const name = useSelector((state) => state.auth.user?.name);
 
   return (
     <header className={styles["header"]}>
@@ -35,7 +36,7 @@ const Header = () => {
               className={styles["nav__user-img"]}
               alt=""
             />
-            <span>Name</span>
+            <span>{name}</span>
           </a>
         ) : (
           <>

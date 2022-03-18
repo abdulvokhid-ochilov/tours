@@ -1,4 +1,5 @@
 import { authActions } from "./auth-slice";
+import { toast } from "react-toastify";
 
 // export const fetchCartData = () => {
 //   return async (dispatch) => {
@@ -36,19 +37,12 @@ import { authActions } from "./auth-slice";
 //   };
 // };
 
-export const fetchUserData = (user) => {
+export const fetchUserData = (user, navigate) => {
   return async (dispatch) => {
-    // dispatch(
-    //   uiActions.showNotification({
-    //     status: "pending",
-    //     title: "Sending...",
-    //     message: "Sending cart data!",
-    //   })
-    // );
-
     const sendRequest = async () => {
       const response = await fetch("http://localhost:5000/api/v1/users/login", {
         method: "POST",
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify(user),
       });
 
@@ -62,8 +56,12 @@ export const fetchUserData = (user) => {
     };
 
     try {
-      const userData = await sendRequest();
-
+      const userData = await toast.promise(sendRequest(), {
+        pending: "Logging in ⚙️",
+        success: "Logged in successfully🔑",
+        error: "Please check your credentials⚠️",
+      });
+      console.log(userData);
       dispatch(
         authActions.loginUser({
           user: userData.data.user,
@@ -71,24 +69,51 @@ export const fetchUserData = (user) => {
         })
       );
 
-      console.log(userData);
-
-      //   dispatch(
-      //     uiActions.showNotification({
-      //       status: "success",
-      //       title: "Success!",
-      //       message: "Sent cart data successfully!",
-      //     })
-      //   );
+      navigate("/", { replace: true });
     } catch (error) {
       console.log(error);
-      //   dispatch(
-      //     uiActions.showNotification({
-      //       status: "error",
-      //       title: "Error!",
-      //       message: "Sending cart data failed!",
-      //     })
-      //   );
+    }
+  };
+};
+
+export const signUpUser = (user, navigate) => {
+  return async (dispatch) => {
+    const sendRequest = async () => {
+      const response = await fetch(
+        "http://localhost:5000/api/v1/users/signup",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(user),
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error("Signup failed.");
+      }
+
+      const data = await response.json();
+
+      return data;
+    };
+
+    try {
+      const userData = await toast.promise(sendRequest(), {
+        pending: "Signing up ⚙️",
+        success: "Signing up successfully🔑",
+        error: "Please check your credentials⚠️",
+      });
+      console.log(userData);
+      dispatch(
+        authActions.loginUser({
+          user: userData.data.user,
+          token: userData.token,
+        })
+      );
+
+      navigate("/", { replace: true });
+    } catch (error) {
+      console.log(error);
     }
   };
 };

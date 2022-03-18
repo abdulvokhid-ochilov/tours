@@ -72,6 +72,10 @@ code {
     monospace;
 }
 
+.toaster {
+  font-size: large;
+}
+
 .main {
   background-color: #f7f7f7;
   padding: 8rem 6rem;

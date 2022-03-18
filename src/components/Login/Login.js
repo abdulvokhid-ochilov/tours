@@ -1,24 +1,27 @@
 import styles from "./Login.module.css";
 import { useRef } from "react";
-// import useFetch from "../../hooks/useFetch";
 import { fetchUserData } from "../../store/auth-actions";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   const email = useRef();
   const password = useRef();
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const loginHandler = (e) => {
     e.preventDefault();
 
     dispatch(
-      fetchUserData({
-        email: email.current.value,
-        password: password.current.value,
-      })
+      fetchUserData(
+        {
+          email: email.current.value,
+          password: password.current.value,
+        },
+        navigate
+      )
     );
-    // const { data, error, loading } = useFetch();
   };
   return (
     <main className={`main ${styles["login-form"]}`}>

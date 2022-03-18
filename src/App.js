@@ -13,6 +13,8 @@ import Account from "./components/Account/Account";
 import { Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
 import SignUpPage from "./pages/SignUpPage";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function App() {
   return (
@@ -41,6 +43,18 @@ function App() {
       {/* <TourReviews /> */}
       {/* <TourCTA /> */}
       {/* <Account /> */}
+      <ToastContainer
+        position="top-center"
+        autoClose={3000}
+        hideProgressBar
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        className="toaster"
+      />
       <Footer />
     </div>
   );

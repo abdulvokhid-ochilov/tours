@@ -1,18 +1,56 @@
 import styles from "./SignUp.module.css";
+import { useRef } from "react";
+import { toast } from "react-toastify";
+import { signUpUser } from "../../store/auth-actions";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 const SignUp = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const email = useRef();
+  const name = useRef();
+  const password = useRef();
+  const confirmPassword = useRef();
+
+  const submitHandler = (e) => {
+    e.preventDefault();
+
+    if (
+      confirmPassword.current.value.localeCompare(password.current.value) !== 0
+    )
+      return toast.error("Please confirm your password⚠️");
+
+    dispatch(
+      signUpUser(
+        {
+          name: name.current.value,
+          email: email.current.value,
+          password: password.current.value,
+        },
+        navigate
+      )
+    );
+  };
+
   return (
     <main className={`main ${styles["login-form"]}`}>
       <h2 className="heading-secondary ma-bt-lg">Create your account!</h2>
-      <form className={`${styles["form__group"]}`}>
+      <form className={`${styles["form__group"]}`} onSubmit={submitHandler}>
         <label htmlFor="name" className={`${styles["form__label"]}`}>
           Your name
         </label>
-        <input type="text" className={`${styles["form__input"]}`} required />
+        <input
+          ref={name}
+          type="text"
+          className={`${styles["form__input"]}`}
+          required
+        />
         <label htmlFor="email" className={`${styles["form__label"]}`}>
           Email address
         </label>
         <input
+          ref={email}
           type="email"
           className={`${styles["form__input"]}`}
           placeholder="you@example.com"
@@ -22,6 +60,7 @@ const SignUp = () => {
           Password
         </label>
         <input
+          ref={password}
           className={`${styles["form__input"]}`}
           type="password"
           placeholder="••••••••"
@@ -32,6 +71,7 @@ const SignUp = () => {
           Confirm Password
         </label>
         <input
+          ref={confirmPassword}
           className={`${styles["form__input"]}`}
           type="password"
           placeholder="••••••••"
