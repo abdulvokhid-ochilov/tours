@@ -9,7 +9,7 @@ const ManageUsers = () => {
         <div className={styles["user__avatar"]}>
           <div className={styles["user__name"]}>
             <img
-              src="img/users/user-7.jpg"
+              src="/img/users/user-7.jpg"
               alt="Jim Brown"
               className={styles["user__avatar-img"]}
             />

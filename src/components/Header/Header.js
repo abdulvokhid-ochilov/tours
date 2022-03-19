@@ -26,18 +26,18 @@ const Header = () => {
         </form>
       </nav>
       <div className={styles["header__logo"]}>
-        <img src="./img/logo-white.png" alt="Natours logo" />
+        <img src="/img/logo-white.png" alt="Natours logo" />
       </div>
       <nav className={`${styles["nav"]} ${styles["nav--user"]}`}>
         {status ? (
-          <a href="/" className={styles["nav__el"]}>
+          <Link to="/account" className={styles["nav__el"]}>
             <img
               src="./img/users/user-5.jpg"
               className={styles["nav__user-img"]}
               alt=""
             />
             <span>{name}</span>
-          </a>
+          </Link>
         ) : (
           <>
             <Link to="/login" className={styles["nav__el"]}>

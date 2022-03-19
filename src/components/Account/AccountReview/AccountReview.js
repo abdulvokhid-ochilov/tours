@@ -52,7 +52,7 @@ const AccountReview = () => {
                 onClick={clickHandler}
                 id={1}
               >
-                <use href="img/icons.svg#icon-star"></use>
+                <use href="/img/icons.svg#icon-star"></use>
               </svg>
               <svg
                 className={`${styles["reviews__star"]} ${
@@ -63,7 +63,7 @@ const AccountReview = () => {
                 onClick={clickHandler}
                 id={2}
               >
-                <use href="img/icons.svg#icon-star"></use>
+                <use href="/img/icons.svg#icon-star"></use>
               </svg>
               <svg
                 className={`${styles["reviews__star"]} ${
@@ -74,7 +74,7 @@ const AccountReview = () => {
                 onClick={clickHandler}
                 id={3}
               >
-                <use href="img/icons.svg#icon-star"></use>
+                <use href="/img/icons.svg#icon-star"></use>
               </svg>
               <svg
                 className={`${styles["reviews__star"]} ${
@@ -85,7 +85,7 @@ const AccountReview = () => {
                 onClick={clickHandler}
                 id={4}
               >
-                <use href="img/icons.svg#icon-star"></use>
+                <use href="/img/icons.svg#icon-star"></use>
               </svg>
               <svg
                 className={`${styles["reviews__star"]} ${
@@ -96,7 +96,7 @@ const AccountReview = () => {
                 onClick={clickHandler}
                 id={5}
               >
-                <use href="img/icons.svg#icon-star"></use>
+                <use href="/img/icons.svg#icon-star"></use>
               </svg>
             </div>
           </div>

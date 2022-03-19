@@ -10,7 +10,7 @@ const ManageTours = () => {
           <div className={styles.card__picture}>
             <div className={styles["card__picture-overlay"]}>&nbsp;</div>
             <img
-              src="img/tours/tour-1-cover.jpg"
+              src="/img/tours/tour-1-cover.jpg"
               alt="Tour 1"
               className={styles["card__picture-img"]}
             />
@@ -28,37 +28,37 @@ const ManageTours = () => {
           </p>
           <div className={styles["card__data"]}>
             <svg className={styles["card__icon"]}>
-              <use href="img/icons.svg#icon-map-pin"></use>
+              <use href="/img/icons.svg#icon-map-pin"></use>
             </svg>
             <span>Banff, Canada</span>
           </div>
           <div className={styles["card__data"]}>
             <svg className={styles["card__icon"]}>
-              <use href="img/icons.svg#icon-calendar"></use>
+              <use href="/img/icons.svg#icon-calendar"></use>
             </svg>
             <span>April 2021</span>
           </div>
           <div className={styles["card__data"]}>
             <svg className={styles["card__icon"]}>
-              <use href="img/icons.svg#icon-flag"></use>
+              <use href="/img/icons.svg#icon-flag"></use>
             </svg>
             <span>3 stops</span>
           </div>
           <div className={styles["card__data"]}>
             <svg className={styles["card__icon"]}>
-              <use href="img/icons.svg#icon-user"></use>
+              <use href="/img/icons.svg#icon-user"></use>
             </svg>
             <span>25 people</span>
           </div>
           <div className={styles["card__data"]}>
             <svg className={styles["card__icon"]}>
-              <use href="img/icons.svg#icon-dollar-sign"></use>
+              <use href="/img/icons.svg#icon-dollar-sign"></use>
             </svg>
             <span>297</span>
           </div>
           <div className={styles["card__data"]}>
             <svg className={styles["card__icon"]}>
-              <use href="img/icons.svg#icon-star"></use>
+              <use href="/img/icons.svg#icon-star"></use>
             </svg>
             <span>4.9</span>
           </div>
