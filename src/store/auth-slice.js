@@ -12,6 +12,7 @@ const authSlice = createSlice({
     loginUser(state, action) {
       const { user, token } = action.payload;
       state.token = token;
+      localStorage.setItem("toursUserToken", token);
       state.user = user;
       state.loginStatus = true;
     },
@@ -19,6 +20,7 @@ const authSlice = createSlice({
       state.user = {};
       state.loginStatus = false;
       state.token = null;
+      localStorage.removeItem("toursUserToken");
     },
   },
 });

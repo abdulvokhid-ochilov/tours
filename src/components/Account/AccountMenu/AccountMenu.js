@@ -1,14 +1,20 @@
 import styles from "./AccountMenu.module.css";
 import { NavLink } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { useState } from "react";
+import { authActions } from "../../../store/auth-slice";
 
 const AccountMenu = () => {
   const role = useSelector((state) => state.auth.user.role);
+  const dispatch = useDispatch();
   const [active, setActive] = useState(true);
 
   const clickHandler = (prop) => {
     setActive(prop);
+  };
+
+  const logOutHandler = () => {
+    dispatch(authActions.logoutUser());
   };
   return (
     <nav className={styles["user-view__menu"]}>
@@ -71,7 +77,7 @@ const AccountMenu = () => {
             </li>
             <li key="billing">
               <NavLink
-                to="/account"
+                to="/account/billing"
                 className={(navData) =>
                   navData.isActive && styles["side-nav--active"]
                 }
@@ -82,11 +88,11 @@ const AccountMenu = () => {
                 </svg>
                 Billing
               </NavLink>
-            </li>{" "}
+            </li>
           </>
         )}
         {role === "admin" && (
-          <ul className={styles["side-nav"]}>
+          <>
             <li key="tours">
               <NavLink
                 to="/account/tours"
@@ -157,8 +163,22 @@ const AccountMenu = () => {
                 Manage bookings
               </NavLink>
             </li>
-          </ul>
+          </>
         )}
+        <li key="log-out">
+          <NavLink
+            to="/"
+            className={(navData) =>
+              navData.isActive && styles["side-nav--active"]
+            }
+            onClick={logOutHandler}
+          >
+            <svg>
+              <use href="/img/icons.svg#icon-log-out"></use>
+            </svg>
+            Log out
+          </NavLink>
+        </li>
       </ul>
     </nav>
   );

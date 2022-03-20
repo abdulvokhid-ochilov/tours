@@ -1,50 +1,37 @@
 import Header from "./components/Header/Header";
-import Tours from "./components/TourCard/Tours/Tours";
 import Footer from "./components/Footer/Footer";
 import Login from "./components/Login/Login";
-import SignUp from "./components/Signup/SIgnUp";
-import TourHeader from "./components/TourDetails/TourHeader/TourHeader";
-import TourDescription from "./components/TourDetails/TourDescription/TourDescription";
-import TourPictures from "./components/TourDetails/TourPictures/TourPictures";
-import TourMap from "./components/TourDetails/TourMap/TourMap";
-import TourReviews from "./components/TourDetails/TourReviews/TourReviews";
-import TourCTA from "./components/TourDetails/TourCTA/TourCTA";
-import Account from "./components/Account/Account";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useNavigate } from "react-router-dom";
 import Home from "./pages/Home";
 import SignUpPage from "./pages/SignUpPage";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import AccountPage from "./pages/AccountPage";
+import { useEffect } from "react";
+import { fetchUserProfile } from "./store/auth-actions";
+import { useDispatch } from "react-redux";
 
 function App() {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const token = localStorage.getItem("toursUserToken");
+    if (token) {
+      dispatch(fetchUserProfile(token, navigate));
+    }
+  }, []);
+
   return (
     <div className="App">
       <Header />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/signup" element={<SignUp />} />
+        <Route path="/signup" element={<SignUpPage />} />
         <Route path="/account/*" element={<AccountPage />} />
-        {/* <Route
-            path="/protected"
-            element={
-              <RequireAuth>
-                <ProtectedPage />
-              </RequireAuth>
-            }
-          /> */}
       </Routes>
-      {/* <Tours /> */}
 
-      {/* <SignUp /> */}
-      {/* <TourHeader /> */}
-      {/* <TourDescription /> */}
-      {/* <TourPictures /> */}
-      {/* <TourMap /> */}
-      {/* <TourReviews /> */}
-      {/* <TourCTA /> */}
-      {/* <Account /> */}
       <ToastContainer
         position="top-center"
         autoClose={3000}
