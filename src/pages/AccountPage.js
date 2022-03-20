@@ -8,7 +8,7 @@ import CreateTour from "../components/Account/Admin/CreateTour/CreateTour";
 import ManageTours from "../components/Account/Admin/ManageTours/ManageTours";
 import ManageUsers from "../components/Account/Admin/ManageUsers/ManageUsers";
 
-const AccountPage = () => {
+const AccountPage = (props) => {
   return (
     <Account>
       <AccountMenu />

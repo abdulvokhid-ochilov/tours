@@ -1,6 +1,6 @@
 import styles from "./Header.module.css";
 import { useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 
 const Header = () => {
   const status = useSelector((state) => state.auth.loginStatus);
@@ -9,9 +9,9 @@ const Header = () => {
   return (
     <header className={styles["header"]}>
       <nav className={`${styles["nav"]} ${styles["nav--tours"]}`}>
-        <a href="/" className={styles["nav__el"]}>
+        <Link to="/" className={styles["nav__el"]}>
           All tours
-        </a>
+        </Link>
         <form className={styles.nav__search}>
           <button className={styles["nav__search-btn"]}>
             <svg>
