@@ -1,6 +1,14 @@
 import styles from "./Card.module.css";
 
-const Card = () => {
+const Card = ({
+  name,
+  duration,
+  difficulty,
+  ratingsAverage,
+  ratingsQuantity,
+  price,
+  summary,
+}) => {
   return (
     <div className={styles.card}>
       <div className={styles.card__header}>
@@ -14,15 +22,15 @@ const Card = () => {
         </div>
 
         <h3 className="heading-tertirary">
-          <span>The Forest Hiker</span>
+          <span>{name}</span>
         </h3>
       </div>
 
       <div className={styles["card__details"]}>
-        <h4 className={styles["card__sub-heading"]}>Easy 5-day tour</h4>
-        <p className={styles["card__text"]}>
-          Breathtaking hike through the Canadian Banff National Park
-        </p>
+        <h4 className={styles["card__sub-heading"]}>
+          {difficulty} {duration}-day tour
+        </h4>
+        <p className={styles["card__text"]}>{summary}</p>
         <div className={styles["card__data"]}>
           <svg className={styles["card__icon"]}>
             <use href="img/icons.svg#icon-map-pin"></use>
@@ -51,12 +59,14 @@ const Card = () => {
 
       <div className={styles["card__footer"]}>
         <p>
-          <span className={styles["card__footer-value"]}>$297</span>
+          <span className={styles["card__footer-value"]}>${price}</span>
           <span className={styles["card__footer-text"]}>per person</span>
         </p>
         <p className={styles["card__ratings"]}>
-          <span className={styles["card__footer-value"]}>4.9</span>
-          <span className={styles["card__footer-text"]}>rating (21)</span>
+          <span className={styles["card__footer-value"]}>{ratingsAverage}</span>
+          <span className={styles["card__footer-text"]}>
+            rating ({ratingsQuantity})
+          </span>
         </p>
         <a href="/" className="btn btn--green btn--small">
           Details

@@ -9,6 +9,8 @@ import "react-toastify/dist/ReactToastify.css";
 import AccountPage from "./pages/AccountPage";
 import { useEffect } from "react";
 import { fetchUserProfile } from "./store/auth-actions";
+import { getAllUsers } from "./store/users-actions";
+import { getAllTours } from "./store/tours-actions";
 import { useDispatch } from "react-redux";
 
 function App() {
@@ -20,6 +22,9 @@ function App() {
     if (token) {
       dispatch(fetchUserProfile(token, navigate));
     }
+
+    dispatch(getAllTours());
+    dispatch(getAllUsers(token));
   }, []);
 
   return (

@@ -37,7 +37,7 @@ const AccountMenu = () => {
               <NavLink
                 to="/bookings"
                 className={(navData) =>
-                  navData.isActive && styles["side-nav--active"]
+                  navData.isActive ? styles["side-nav--active"] : null
                 }
                 onClick={clickHandler.bind(null, false)}
               >
@@ -51,7 +51,7 @@ const AccountMenu = () => {
               <NavLink
                 to="/account/reviews"
                 className={(navData) =>
-                  navData.isActive && styles["side-nav--active"]
+                  navData.isActive ? styles["side-nav--active"] : null
                 }
                 onClick={clickHandler.bind(null, false)}
               >
@@ -65,7 +65,7 @@ const AccountMenu = () => {
               <NavLink
                 to="/account/review"
                 className={(navData) =>
-                  navData.isActive && styles["side-nav--active"]
+                  navData.isActive ? styles["side-nav--active"] : null
                 }
                 onClick={clickHandler.bind(null, false)}
               >
@@ -79,7 +79,7 @@ const AccountMenu = () => {
               <NavLink
                 to="/account/billing"
                 className={(navData) =>
-                  navData.isActive && styles["side-nav--active"]
+                  navData.isActive ? styles["side-nav--active"] : null
                 }
                 onClick={clickHandler.bind(null, false)}
               >
@@ -97,7 +97,7 @@ const AccountMenu = () => {
               <NavLink
                 to="/account/tours"
                 className={(navData) =>
-                  navData.isActive && styles["side-nav--active"]
+                  navData.isActive ? styles["side-nav--active"] : null
                 }
                 onClick={clickHandler.bind(null, false)}
               >
@@ -111,7 +111,7 @@ const AccountMenu = () => {
               <NavLink
                 to="/account/create-tour"
                 className={(navData) =>
-                  navData.isActive && styles["side-nav--active"]
+                  navData.isActive ? styles["side-nav--active"] : null
                 }
                 onClick={clickHandler.bind(null, false)}
               >
@@ -125,7 +125,7 @@ const AccountMenu = () => {
               <NavLink
                 to="/account/users"
                 className={(navData) =>
-                  navData.isActive && styles["side-nav--active"]
+                  navData.isActive ? styles["side-nav--active"] : null
                 }
                 onClick={clickHandler.bind(null, false)}
               >
@@ -139,7 +139,7 @@ const AccountMenu = () => {
               <NavLink
                 to="/account/reviews"
                 className={(navData) =>
-                  navData.isActive && styles["side-nav--active"]
+                  navData.isActive ? styles["side-nav--active"] : null
                 }
                 onClick={clickHandler.bind(null, false)}
               >
@@ -153,7 +153,7 @@ const AccountMenu = () => {
               <NavLink
                 to="/account/bookings"
                 className={(navData) =>
-                  navData.isActive && styles["side-nav--active"]
+                  navData.isActive ? styles["side-nav--active"] : null
                 }
                 onClick={clickHandler.bind(null, false)}
               >
@@ -169,7 +169,7 @@ const AccountMenu = () => {
           <NavLink
             to="/"
             className={(navData) =>
-              navData.isActive && styles["side-nav--active"]
+              navData.isActive ? styles["side-nav--active"] : null
             }
             onClick={logOutHandler}
           >
