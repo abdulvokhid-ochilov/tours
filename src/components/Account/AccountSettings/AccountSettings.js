@@ -1,32 +1,88 @@
 import styles from "./AccountSettings.module.css";
+import { useSelector, useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import {
+  updateUserPassword,
+  updateUserInformation,
+} from "../../../store/auth-actions";
+import { useRef } from "react";
+import { toast } from "react-toastify";
 
 const AccountSettings = () => {
+  const token = useSelector((state) => state.auth.token);
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const password = useRef();
+  const newPassword = useRef();
+  const confirmNewPassword = useRef();
+  const name = useRef();
+  const email = useRef();
+
+  const updateUserPasswordHandler = (e) => {
+    e.preventDefault();
+
+    if (
+      confirmNewPassword.current.value.localeCompare(
+        newPassword.current.value
+      ) !== 0
+    )
+      return toast.error("Please confirm your password⚠️");
+
+    dispatch(
+      updateUserPassword(
+        {
+          oldPassword: password.current.value,
+          newPassword: newPassword.current.value,
+        },
+        token,
+        navigate
+      )
+    );
+  };
+
+  const updateUserInfoHandler = (e) => {
+    e.preventDefault();
+
+    dispatch(
+      updateUserInformation(
+        {
+          name: name.current.value,
+          email: email.current.value,
+        },
+        token,
+        navigate
+      )
+    );
+  };
+
   return (
     <div className={styles["user-view__content"]}>
       <div className={styles["user-view__form-container"]}>
         <h2 className="heading-secondary ma-bt-md">Your account settings</h2>
-        <form>
+        <form onSubmit={updateUserInfoHandler}>
           <div className={styles["form__group"]}>
             <label className={styles["form__label"]} htmlFor="name">
-              Name
+              New Name
             </label>
             <input
+              ref={name}
               className={styles["form__input"]}
               id="name"
               type="text"
-              required="required"
+              required
               name="name"
             />
           </div>
           <div className={`${styles["form__group"]} ma-bt-md"`}>
             <label className={styles["form__label"]} htmlFor="email">
-              Email address
+              New Email address
             </label>
             <input
+              ref={email}
               className={styles["form__input"]}
               id="email"
               type="email"
-              required="required"
+              required
               name="email"
             />
           </div>
@@ -55,18 +111,19 @@ const AccountSettings = () => {
       <div className={styles["line"]}>&nbsp;</div>
       <div className={styles["user-view__form-container"]}>
         <h2 className="heading-secondary ma-bt-md">Password change</h2>
-        <form>
+        <form onSubmit={updateUserPasswordHandler}>
           <div className={styles["form__group"]}>
             <label className={styles["form__label"]} htmlFor="password-current">
               Current password
             </label>
             <input
+              ref={password}
               className={styles["form__input"]}
               id="password-current"
               type="password"
               placeholder="••••••••"
-              required="required"
-              minlength="8"
+              required
+              minLength="8"
             />
           </div>
           <div className={styles["form__group"]}>
@@ -74,12 +131,13 @@ const AccountSettings = () => {
               New password
             </label>
             <input
+              ref={newPassword}
               className={styles["form__input"]}
               id="password"
               type="password"
               placeholder="••••••••"
-              required="required"
-              minlength="8"
+              required
+              minLength="8"
             />
           </div>
           <div className={`${styles["form__group"]} ma-bt-lg`}>
@@ -87,12 +145,13 @@ const AccountSettings = () => {
               Confirm password
             </label>
             <input
+              ref={confirmNewPassword}
               className={styles["form__input"]}
               id="password-confirm"
               type="password"
               placeholder="••••••••"
-              required="required"
-              minlength="8"
+              required
+              minLength="8"
             />
           </div>
           <div className={`${styles["form__group"]} right`}>

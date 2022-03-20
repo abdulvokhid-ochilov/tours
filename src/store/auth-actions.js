@@ -54,7 +54,7 @@ export const fetchUserProfile = (token, navigate) => {
       );
 
       if (!response.ok) {
-        throw new Error("Login failed.");
+        throw new Error("Fetching user data failed.");
       }
 
       const data = await response.json();
@@ -115,6 +115,96 @@ export const signUpUser = (user, navigate) => {
         authActions.loginUser({
           user: userData.data.user,
           token: userData.token,
+        })
+      );
+
+      navigate("/", { replace: true });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+
+export const updateUserPassword = (passwords, token, navigate) => {
+  return async (dispatch) => {
+    const sendRequest = async () => {
+      const response = await fetch(
+        "http://localhost:5000/api/v1/users/update-my-password",
+        {
+          method: "PATCH",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify(passwords),
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error("Updating password failed.");
+      }
+
+      const data = await response.json();
+
+      return data;
+    };
+
+    try {
+      const userData = await toast.promise(sendRequest(), {
+        pending: "Updating ⚙️",
+        success: "Updated successfully🔑",
+        error: "Please check your password and try again⚠️",
+      });
+
+      dispatch(
+        authActions.loginUser({
+          user: userData.data.user,
+          token: userData.token,
+        })
+      );
+
+      navigate("/", { replace: true });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+
+export const updateUserInformation = (newData, token, navigate) => {
+  return async (dispatch) => {
+    const sendRequest = async () => {
+      const response = await fetch(
+        "http://localhost:5000/api/v1/users/my-profile",
+        {
+          method: "PATCH",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify(newData),
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error("Updating user information failed.");
+      }
+
+      const data = await response.json();
+
+      return data;
+    };
+
+    try {
+      const userData = await toast.promise(sendRequest(), {
+        pending: "Updating ⚙️",
+        success: "Updated successfully🔑",
+        error: "Please check your name and email, and try again⚠️",
+      });
+
+      dispatch(
+        authActions.loginUser({
+          user: userData.data.user,
+          token: token,
         })
       );
 
