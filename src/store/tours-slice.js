@@ -19,6 +19,12 @@ const toursSlice = createSlice({
       const { id } = action.payload;
       state.tours = state.tours.filter((tour) => tour._id !== id);
     },
+    replaceTour(state, action) {
+      const { newTour } = action.payload;
+      state.tours = state.tours.filter((tour) =>
+        tour._id === newTour._id ? newTour : tour
+      );
+    },
   },
 });
 

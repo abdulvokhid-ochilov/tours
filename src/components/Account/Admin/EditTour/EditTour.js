@@ -1,46 +1,76 @@
-import styles from "./CreateTour.module.css";
-import { useRef, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import styles from "./EditTour.module.css";
+import { useRef, useEffect } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { createNewTour } from "../../../../store/tours-actions";
+// import { createNewTour } from "../../../../store/tours-actions";
 
-const CreateTour = () => {
+const EditTour = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const token = useSelector((state) => state.auth.token);
-  const [coverImg, setCoverImg] = useState({ src: null, file: null });
-  const [tourImg1, setTourImg1] = useState({ src: null, file: null });
-  const [tourImg2, setTourImg2] = useState({ src: null, file: null });
-  const [tourImg3, setTourImg3] = useState({ src: null, file: null });
+  const id = useParams().id;
 
-  const name = useRef();
-  const duration = useRef();
-  const groupSize = useRef();
-  const difficulty = useRef();
-  const price = useRef();
-  const date = useRef();
-  const summary = useRef();
-  const description = useRef();
+  const name_ = useRef();
+  const duration_ = useRef();
+  const groupSize_ = useRef();
+  const difficulty_ = useRef();
+  const price_ = useRef();
+  const date_ = useRef();
+  const summary_ = useRef();
+  const description_ = useRef();
+
+  useEffect(() => {
+    fetch(`http://localhost:5000/api/v1/tours/${id}`)
+      .then((results) => results.json())
+      .then(
+        ({
+          data: {
+            tour: {
+              name,
+              duration,
+              maxGroupSize,
+              difficulty,
+              price,
+              startDates,
+              summary,
+              description,
+            },
+          },
+        }) => {
+          console.log(name);
+          name_.current.value = name;
+          duration_.current.value = duration;
+          groupSize_.current.value = maxGroupSize;
+          difficulty_.current.value = difficulty;
+          price_.current.value = price;
+          date_.current.value = startDates[0].split("T")[0];
+          summary_.current.value = summary;
+          description_.current.value = description;
+        }
+      );
+  }, [id]);
 
   const formSubmitHandler = (e) => {
     e.preventDefault();
-    const formData = new FormData();
 
-    formData.append("name", name.current.value);
-    formData.append("duration", duration.current.value);
-    formData.append("maxGroupSize", groupSize.current.value);
-    formData.append("difficulty", difficulty.current.value);
-    formData.append("price", price.current.value);
-    formData.append("summary", summary.current.value);
-    formData.append("description", description.current.value);
-    formData.append("imageCover", coverImg.file);
-    formData.append("images", tourImg1.file);
-    formData.append("images", tourImg2.file);
-    formData.append("images", tourImg3.file);
-    formData.append("startDates", date.current.value);
-    formData.append("startDates", date.current.value);
-
-    dispatch(createNewTour(formData, token, navigate));
+    // dispatch(
+    //   createNewTour(
+    //     {
+    //       name: name.current.value,
+    //       duration: duration.current.value,
+    //       maxGroupSize: groupSize.current.value,
+    //       difficulty: difficulty.current.value,
+    //       price: price.current.value,
+    //       summary: summary.current.value,
+    //       description: description.current.value,
+    //       imageCover: "tour-1-cover.jpg",
+    //       images: ["tour-1-1.jpg", "tour-1-2.jpg", "tour-1-3.jpg"],
+    //       startDates: [date.current.value],
+    //     },
+    //     token,
+    //     navigate
+    //   )
+    // );
   };
 
   return (
@@ -53,7 +83,7 @@ const CreateTour = () => {
               Name
             </label>
             <input
-              ref={name}
+              ref={name_}
               type="text"
               className={styles["form__input"]}
               required
@@ -62,7 +92,7 @@ const CreateTour = () => {
               Duration
             </label>
             <input
-              ref={duration}
+              ref={duration_}
               type="number"
               className={styles["form__input"]}
               min="1"
@@ -73,7 +103,7 @@ const CreateTour = () => {
               Group Size
             </label>
             <input
-              ref={groupSize}
+              ref={groupSize_}
               type="number"
               className={styles["form__input"]}
               min="1"
@@ -84,7 +114,7 @@ const CreateTour = () => {
               Difficulty
             </label>
             <select
-              ref={difficulty}
+              ref={difficulty_}
               name="difficulty"
               className={`${styles["form__input"]} ${styles["form__select"]}`}
               id="tours-select"
@@ -104,7 +134,7 @@ const CreateTour = () => {
               Price($)
             </label>
             <input
-              ref={price}
+              ref={price_}
               type="number"
               className={styles["form__input"]}
               min="1"
@@ -115,7 +145,7 @@ const CreateTour = () => {
               Date
             </label>
             <input
-              ref={date}
+              ref={date_}
               type="date"
               className={styles["form__input"]}
               required
@@ -128,7 +158,7 @@ const CreateTour = () => {
             </label>
 
             <textarea
-              ref={summary}
+              ref={summary_}
               className={styles["form__input"]}
               id={styles["textarea"]}
               type="text"
@@ -142,7 +172,7 @@ const CreateTour = () => {
             </label>
 
             <textarea
-              ref={description}
+              ref={description_}
               className={styles["form__input"]}
               id={styles["textarea"]}
               type="text"
@@ -159,90 +189,62 @@ const CreateTour = () => {
             <div className={styles["photo__group"]}>
               <img
                 className={styles["form__tour-photo"]}
-                src={coverImg.src}
+                src="/img/tours/tour-2-1.jpg"
                 alt=""
               />
               <input
-                required
                 className={styles["form__upload"]}
                 type="file"
                 accept="image/*"
-                id="cover"
-                name="cover"
-                onChange={(e) => {
-                  setCoverImg({
-                    src: URL.createObjectURL(e.target.files[0]),
-                    file: e.target.files[0],
-                  });
-                }}
+                id="photo"
+                name="photo"
               />
-              <label htmlFor="cover">Choose a cover image</label>
+              <label htmlFor="photo">Choose a cover image</label>
             </div>
             <div className={styles["photo__group"]}>
               <img
                 className={styles["form__tour-photo"]}
-                src={tourImg1.src}
+                src="/img/tours/tour-2-2.jpg"
                 alt=""
               />
               <input
-                required
                 className={styles["form__upload"]}
                 type="file"
                 accept="image/*"
-                id="photo1"
-                name="photo1"
-                onChange={(e) => {
-                  setTourImg1({
-                    src: URL.createObjectURL(e.target.files[0]),
-                    file: e.target.files[0],
-                  });
-                }}
+                id="photo"
+                name="photo"
               />
-              <label htmlFor="photo1">Choose a tour image</label>
+              <label htmlFor="photo">Choose a tour image</label>
             </div>
             <div className={styles["photo__group"]}>
               <img
                 className={styles["form__tour-photo"]}
-                src={tourImg2.src}
+                src="/img/tours/tour-2-3.jpg"
                 alt=""
               />
               <input
-                required
                 className={styles["form__upload"]}
                 type="file"
                 accept="image/*"
-                id="photo2"
-                name="photo2"
-                onChange={(e) => {
-                  setTourImg2({
-                    src: URL.createObjectURL(e.target.files[0]),
-                    file: e.target.files[0],
-                  });
-                }}
+                id="photo"
+                name="photo"
               />
-              <label htmlFor="photo2">Choose a tour image</label>
+              <label htmlFor="photo">Choose a tour image</label>
             </div>
             <div className={styles["photo__group"]}>
               <img
                 className={styles["form__tour-photo"]}
-                src={tourImg3.src}
+                src="/img/tours/tour-4-3.jpg"
                 alt=""
               />
               <input
-                required
                 className={styles["form__upload"]}
                 type="file"
                 accept="image/*"
-                id="photo3"
-                name="photo3"
-                onChange={(e) => {
-                  setTourImg3({
-                    src: URL.createObjectURL(e.target.files[0]),
-                    file: e.target.files[0],
-                  });
-                }}
+                id="photo"
+                name="photo"
               />
-              <label htmlFor="photo3">Choose a tour image</label>
+              <label htmlFor="photo">Choose a tour image</label>
             </div>
           </div>
 
@@ -255,4 +257,4 @@ const CreateTour = () => {
   );
 };
 
-export default CreateTour;
+export default EditTour;

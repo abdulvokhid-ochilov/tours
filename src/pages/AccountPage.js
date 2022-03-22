@@ -7,6 +7,7 @@ import AccountSettings from "../components/Account/AccountSettings/AccountSettin
 import CreateTour from "../components/Account/Admin/CreateTour/CreateTour";
 import ManageTours from "../components/Account/Admin/ManageTours/ManageTours";
 import ManageUsers from "../components/Account/Admin/ManageUsers/ManageUsers";
+import EditTour from "../components/Account/Admin/EditTour/EditTour";
 
 const AccountPage = (props) => {
   return (
@@ -17,6 +18,7 @@ const AccountPage = (props) => {
         <Route path="/reviews" element={<AccountReviews />} />
         <Route path="/review" element={<AccountReview />} />
         <Route path="/tours" element={<ManageTours />} />
+        <Route path="/tours/:id" element={<EditTour />} />
         <Route path="/users" element={<ManageUsers />} />
         <Route path="/create-tour" element={<CreateTour />} />
       </Routes>

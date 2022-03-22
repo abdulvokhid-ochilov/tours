@@ -83,7 +83,10 @@ const ManageTours = () => {
             </div>
 
             <div className={styles["card__footer"]}>
-              <Link to="/account/tours" className="btn btn--green btn--small">
+              <Link
+                to={`/account/tours/${_id}`}
+                className="btn btn--green btn--small"
+              >
                 Change
               </Link>
               <Link

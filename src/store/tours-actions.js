@@ -10,7 +10,7 @@ export const createNewTour = (tour, token, navigate) => {
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
         },
-        body: JSON.stringify(tour),
+        body: tour,
       });
 
       if (!response.ok) {
