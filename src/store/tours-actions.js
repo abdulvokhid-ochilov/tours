@@ -4,13 +4,14 @@ import { toast } from "react-toastify";
 export const createNewTour = (tour, token, navigate) => {
   return async (dispatch) => {
     const sendRequest = async () => {
+      console.log(tour);
       const response = await fetch("http://localhost:5000/api/v1/tours", {
         method: "POST",
+        body: tour,
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
         },
-        body: tour,
       });
 
       if (!response.ok) {

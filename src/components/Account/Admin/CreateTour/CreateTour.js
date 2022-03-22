@@ -39,6 +39,7 @@ const CreateTour = () => {
     formData.append("images", tourImg3.file);
     formData.append("startDates", date.current.value);
     formData.append("startDates", date.current.value);
+    // formData.append("startDates", date.current.value);
 
     dispatch(createNewTour(formData, token, navigate));
   };
