@@ -38,8 +38,6 @@ const CreateTour = () => {
     formData.append("images", tourImg2.file);
     formData.append("images", tourImg3.file);
     formData.append("startDates", date.current.value);
-    formData.append("startDates", date.current.value);
-    // formData.append("startDates", date.current.value);
 
     dispatch(createNewTour(formData, token, navigate));
   };
@@ -94,8 +92,8 @@ const CreateTour = () => {
               <option value="easy" className="options">
                 easy
               </option>
-              <option value="moderate" className="options">
-                moderate
+              <option value="medium" className="options">
+                medium
               </option>
               <option value="difficult" className="options">
                 difficult

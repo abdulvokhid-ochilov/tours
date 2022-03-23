@@ -1,14 +1,19 @@
 import styles from "./EditTour.module.css";
-import { useRef, useEffect } from "react";
+import { useRef, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-// import { createNewTour } from "../../../../store/tours-actions";
+import { updateTour } from "../../../../store/tours-actions";
 
 const EditTour = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const token = useSelector((state) => state.auth.token);
   const id = useParams().id;
+
+  const [coverImg, setCoverImg] = useState({ src: null, file: null });
+  const [tourImg1, setTourImg1] = useState({ src: null, file: null });
+  const [tourImg2, setTourImg2] = useState({ src: null, file: null });
+  const [tourImg3, setTourImg3] = useState({ src: null, file: null });
 
   const name_ = useRef();
   const duration_ = useRef();
@@ -34,10 +39,11 @@ const EditTour = () => {
               startDates,
               summary,
               description,
+              images,
+              imageCover,
             },
           },
         }) => {
-          console.log(name);
           name_.current.value = name;
           duration_.current.value = duration;
           groupSize_.current.value = maxGroupSize;
@@ -46,6 +52,10 @@ const EditTour = () => {
           date_.current.value = startDates[0].split("T")[0];
           summary_.current.value = summary;
           description_.current.value = description;
+          setCoverImg({ src: imageCover, file: null });
+          setTourImg1({ src: images[0], file: null });
+          setTourImg2({ src: images[1], file: null });
+          setTourImg3({ src: images[2], file: null });
         }
       );
   }, [id]);
@@ -53,24 +63,22 @@ const EditTour = () => {
   const formSubmitHandler = (e) => {
     e.preventDefault();
 
-    // dispatch(
-    //   createNewTour(
-    //     {
-    //       name: name.current.value,
-    //       duration: duration.current.value,
-    //       maxGroupSize: groupSize.current.value,
-    //       difficulty: difficulty.current.value,
-    //       price: price.current.value,
-    //       summary: summary.current.value,
-    //       description: description.current.value,
-    //       imageCover: "tour-1-cover.jpg",
-    //       images: ["tour-1-1.jpg", "tour-1-2.jpg", "tour-1-3.jpg"],
-    //       startDates: [date.current.value],
-    //     },
-    //     token,
-    //     navigate
-    //   )
-    // );
+    const formData = new FormData();
+
+    formData.append("name", name_.current.value);
+    formData.append("duration", duration_.current.value);
+    formData.append("maxGroupSize", groupSize_.current.value);
+    formData.append("difficulty", difficulty_.current.value);
+    formData.append("price", price_.current.value);
+    formData.append("summary", summary_.current.value);
+    formData.append("description", description_.current.value);
+    formData.append("imageCover", coverImg.file ? coverImg.file : coverImg.src);
+    formData.append("images", tourImg1.file ? tourImg1.file : tourImg1.src);
+    formData.append("images", tourImg2.file ? tourImg2.file : tourImg2.src);
+    formData.append("images", tourImg3.file ? tourImg3.file : tourImg3.src);
+    formData.append("startDates", date_.current.value);
+
+    dispatch(updateTour(formData, id, token, navigate));
   };
 
   return (
@@ -123,8 +131,8 @@ const EditTour = () => {
               <option value="easy" className="options">
                 easy
               </option>
-              <option value="moderate" className="options">
-                moderate
+              <option value="medium" className="options">
+                medium
               </option>
               <option value="difficult" className="options">
                 difficult
@@ -189,62 +197,86 @@ const EditTour = () => {
             <div className={styles["photo__group"]}>
               <img
                 className={styles["form__tour-photo"]}
-                src="/img/tours/tour-2-1.jpg"
+                src={coverImg.src}
                 alt=""
               />
               <input
                 className={styles["form__upload"]}
                 type="file"
                 accept="image/*"
-                id="photo"
-                name="photo"
+                id="cover"
+                name="cover"
+                onChange={(e) => {
+                  setCoverImg({
+                    src: URL.createObjectURL(e.target.files[0]),
+                    file: e.target.files[0],
+                  });
+                }}
               />
-              <label htmlFor="photo">Choose a cover image</label>
+              <label htmlFor="cover">Choose a cover image</label>
             </div>
             <div className={styles["photo__group"]}>
               <img
                 className={styles["form__tour-photo"]}
-                src="/img/tours/tour-2-2.jpg"
+                src={tourImg1.src}
                 alt=""
               />
               <input
                 className={styles["form__upload"]}
                 type="file"
                 accept="image/*"
-                id="photo"
-                name="photo"
+                id="photo1"
+                name="photo1"
+                onChange={(e) => {
+                  setTourImg1({
+                    src: URL.createObjectURL(e.target.files[0]),
+                    file: e.target.files[0],
+                  });
+                }}
               />
-              <label htmlFor="photo">Choose a tour image</label>
+              <label htmlFor="photo1">Choose a tour image</label>
             </div>
             <div className={styles["photo__group"]}>
               <img
                 className={styles["form__tour-photo"]}
-                src="/img/tours/tour-2-3.jpg"
+                src={tourImg2.src}
                 alt=""
               />
               <input
                 className={styles["form__upload"]}
                 type="file"
                 accept="image/*"
-                id="photo"
-                name="photo"
+                id="photo2"
+                name="photo2"
+                onChange={(e) => {
+                  setTourImg2({
+                    src: URL.createObjectURL(e.target.files[0]),
+                    file: e.target.files[0],
+                  });
+                }}
               />
-              <label htmlFor="photo">Choose a tour image</label>
+              <label htmlFor="photo2">Choose a tour image</label>
             </div>
             <div className={styles["photo__group"]}>
               <img
                 className={styles["form__tour-photo"]}
-                src="/img/tours/tour-4-3.jpg"
+                src={tourImg3.src}
                 alt=""
               />
               <input
                 className={styles["form__upload"]}
                 type="file"
                 accept="image/*"
-                id="photo"
-                name="photo"
+                id="photo3"
+                name="photo3"
+                onChange={(e) => {
+                  setTourImg3({
+                    src: URL.createObjectURL(e.target.files[0]),
+                    file: e.target.files[0],
+                  });
+                }}
               />
-              <label htmlFor="photo">Choose a tour image</label>
+              <label htmlFor="photo3">Choose a tour image</label>
             </div>
           </div>
 

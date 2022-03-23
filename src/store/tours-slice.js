@@ -13,7 +13,7 @@ const toursSlice = createSlice({
     },
     addTour(state, action) {
       const { newTour } = action.payload;
-      state.tours = [newTour, ...state.tours];
+      state.tours = [...state.tours, newTour];
     },
     removeTour(state, action) {
       const { id } = action.payload;
@@ -21,9 +21,8 @@ const toursSlice = createSlice({
     },
     replaceTour(state, action) {
       const { newTour } = action.payload;
-      state.tours = state.tours.filter((tour) =>
-        tour._id === newTour._id ? newTour : tour
-      );
+      const tours = state.tours.filter((tour) => tour._id !== newTour._id);
+      state.tours = [...tours, newTour];
     },
   },
 });
