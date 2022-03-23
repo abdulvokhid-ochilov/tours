@@ -5,6 +5,7 @@ import { Link, NavLink } from "react-router-dom";
 const Header = () => {
   const status = useSelector((state) => state.auth.loginStatus);
   const name = useSelector((state) => state.auth.user?.name);
+  const photo = useSelector((state) => state.auth.user.photo);
 
   return (
     <header className={styles["header"]}>
@@ -31,11 +32,7 @@ const Header = () => {
       <nav className={`${styles["nav"]} ${styles["nav--user"]}`}>
         {status ? (
           <Link to="/account" className={styles["nav__el"]}>
-            <img
-              src="./img/users/user-5.jpg"
-              className={styles["nav__user-img"]}
-              alt=""
-            />
+            <img src={photo} className={styles["nav__user-img"]} alt="" />
             <span>{name}</span>
           </Link>
         ) : (

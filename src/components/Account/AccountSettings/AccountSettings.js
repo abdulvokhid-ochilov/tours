@@ -5,11 +5,15 @@ import {
   updateUserPassword,
   updateUserInformation,
 } from "../../../store/auth-actions";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { toast } from "react-toastify";
 
 const AccountSettings = () => {
   const token = useSelector((state) => state.auth.token);
+  const [photo, setPhoto] = useState({
+    src: useSelector((state) => state.auth.user.photo),
+    file: null,
+  });
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const password = useRef();
@@ -43,16 +47,13 @@ const AccountSettings = () => {
   const updateUserInfoHandler = (e) => {
     e.preventDefault();
 
-    dispatch(
-      updateUserInformation(
-        {
-          name: name.current.value,
-          email: email.current.value,
-        },
-        token,
-        navigate
-      )
-    );
+    const formData = new FormData();
+
+    formData.append("photo", photo.file ? photo.file : photo.src);
+    formData.append("email", email.current.value);
+    formData.append("name", name.current.value);
+
+    dispatch(updateUserInformation(formData, token, navigate));
   };
 
   return (
@@ -91,17 +92,23 @@ const AccountSettings = () => {
           >
             <img
               className={styles["form__user-photo"]}
-              src="./img/users/user-5.jpg"
+              src={photo.src}
               alt=""
             />
             <input
               className={styles["form__upload"]}
               type="file"
               accept="image/*"
-              id="photo"
-              name="photo"
+              id="user-photo"
+              name="user-photo"
+              onChange={(e) => {
+                setPhoto({
+                  src: URL.createObjectURL(e.target.files[0]),
+                  file: e.target.files[0],
+                });
+              }}
             />
-            <label htmlFor="photo">Choose new photo</label>
+            <label htmlFor="user-photo">Choose new photo</label>
           </div>
           <div className={`${styles["form__group"]} right`}>
             <button className="btn btn--small btn--green">Save settings</button>
