@@ -1,26 +1,26 @@
 import styles from "./TourPictures.module.css";
 
-const TourPictures = () => {
+const TourPictures = ({ images }) => {
   return (
     <section className={styles["section-pictures"]}>
       <div className={styles["picture-box"]}>
         <img
           className={`${styles["picture-box__img"]} ${styles["picture-box__img--1"]}`}
-          src="img/tours/tour-5-1.jpg"
+          src={images[0]}
           alt="The Park Camper Tour 1"
         />
       </div>
       <div className={styles["picture-box"]}>
         <img
           className={`${styles["picture-box__img"]} ${styles["picture-box__img--2"]}`}
-          src="img/tours/tour-5-2.jpg"
+          src={images[1]}
           alt="The Park Camper Tour 1"
         />
       </div>
       <div className={styles["picture-box"]}>
         <img
           className={`${styles["picture-box__img"]} ${styles["picture-box__img--3"]}`}
-          src="img/tours/tour-5-3.jpg"
+          src={images[2]}
           alt="The Park Camper Tour 1"
         />
       </div>

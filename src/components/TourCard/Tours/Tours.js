@@ -18,9 +18,11 @@ const Tours = () => {
             ratingsQuantity,
             price,
             summary,
+            imageCover,
           }) => (
             <Card
               key={_id}
+              id={_id}
               name={name}
               duration={duration}
               difficulty={difficulty}
@@ -28,6 +30,7 @@ const Tours = () => {
               ratingsQuantity={ratingsQuantity}
               price={price}
               summary={summary}
+              imageCover={imageCover}
             />
           )
         )}

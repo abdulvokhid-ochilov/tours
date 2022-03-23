@@ -1,6 +1,8 @@
 import styles from "./Card.module.css";
+import { Link } from "react-router-dom";
 
 const Card = ({
+  id,
   name,
   duration,
   difficulty,
@@ -8,6 +10,7 @@ const Card = ({
   ratingsQuantity,
   price,
   summary,
+  imageCover,
 }) => {
   return (
     <div className={styles.card}>
@@ -15,7 +18,7 @@ const Card = ({
         <div className={styles.card__picture}>
           <div className={styles["card__picture-overlay"]}>&nbsp;</div>
           <img
-            src="img/tours/tour-1-cover.jpg"
+            src={imageCover}
             alt="Tour 1"
             className={styles["card__picture-img"]}
           />
@@ -68,9 +71,9 @@ const Card = ({
             rating ({ratingsQuantity})
           </span>
         </p>
-        <a href="/" className="btn btn--green btn--small">
+        <Link to={`/tour/${id}`} className="btn btn--green btn--small">
           Details
-        </a>
+        </Link>
       </div>
     </div>
   );

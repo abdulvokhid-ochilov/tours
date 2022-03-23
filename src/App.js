@@ -12,6 +12,7 @@ import { fetchUserProfile } from "./store/auth-actions";
 import { getAllUsers } from "./store/users-actions";
 import { getAllTours } from "./store/tours-actions";
 import { useDispatch } from "react-redux";
+import TourPage from "./pages/TourPage";
 
 function App() {
   const dispatch = useDispatch();
@@ -35,6 +36,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<SignUpPage />} />
         <Route path="/account/*" element={<AccountPage />} />
+        <Route path="/tour/:id" element={<TourPage />} />
       </Routes>
 
       <ToastContainer

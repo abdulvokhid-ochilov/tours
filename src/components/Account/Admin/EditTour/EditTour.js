@@ -84,7 +84,7 @@ const EditTour = () => {
   return (
     <div className={styles["admin-view__content"]}>
       <div className={styles["admin-view__form-container"]}>
-        <h2 className="heading-secondary ma-bt-md">Create a tour</h2>
+        <h2 className="heading-secondary ma-bt-md">Edit a tour</h2>
         <form onSubmit={formSubmitHandler}>
           <div className={styles["form__group"]}>
             <label className={styles["form__label"]} htmlFor="name">
