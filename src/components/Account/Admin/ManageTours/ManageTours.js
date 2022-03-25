@@ -22,13 +22,14 @@ const ManageTours = () => {
           ratingsAverage,
           price,
           summary,
+          imageCover,
         }) => (
           <div key={_id} className={styles["admin-view__tours"]}>
             <div className={styles.card__header}>
               <div className={styles.card__picture}>
                 <div className={styles["card__picture-overlay"]}>&nbsp;</div>
                 <img
-                  src="/img/tours/tour-1-cover.jpg"
+                  src={imageCover}
                   alt="Tour 1"
                   className={styles["card__picture-img"]}
                 />

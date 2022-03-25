@@ -62,16 +62,21 @@ const Card = ({
 
       <div className={styles["card__footer"]}>
         <p>
-          <span className={styles["card__footer-value"]}>${price}</span>
-          <span className={styles["card__footer-text"]}>per person</span>
+          <span className={styles["card__footer-value"]}>${price} </span>
+          <span className={styles["card__footer-text"]}> per person</span>
         </p>
         <p className={styles["card__ratings"]}>
-          <span className={styles["card__footer-value"]}>{ratingsAverage}</span>
+          <span className={styles["card__footer-value"]}>
+            {ratingsAverage}{" "}
+          </span>
           <span className={styles["card__footer-text"]}>
             rating ({ratingsQuantity})
           </span>
         </p>
-        <Link to={`/tour/${id}`} className="btn btn--green btn--small">
+        <Link
+          to={`/tour/${id}`}
+          className={`btn btn--green btn--small ${styles.details}`}
+        >
           Details
         </Link>
       </div>
