@@ -6,6 +6,13 @@ import TourMap from "../components/TourDetails/TourMap/TourMap";
 import TourReviews from "../components/TourDetails/TourReviews/TourReviews";
 import TourCTA from "../components/TourDetails/TourCTA/TourCTA";
 import { useParams } from "react-router-dom";
+import { css } from "@emotion/react";
+import PuffLoader from "react-spinners/PuffLoader";
+
+const override = css`
+  display: block;
+  margin: 25% auto;
+`;
 
 const TourPage = () => {
   const id = useParams().id;
@@ -36,7 +43,9 @@ const TourPage = () => {
       <TourCTA images={tour.images} />
     </>
   ) : (
-    <p>Loading ...</p>
+    <div className="main">
+      <PuffLoader color="#55c57a" css={override} />
+    </div>
   );
 };
 

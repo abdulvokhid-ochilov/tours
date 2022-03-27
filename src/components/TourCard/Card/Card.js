@@ -1,5 +1,6 @@
 import styles from "./Card.module.css";
 import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
 
 const Card = ({
   id,
@@ -13,7 +14,13 @@ const Card = ({
   imageCover,
 }) => {
   return (
-    <div className={styles.card}>
+    <motion.div
+      layout
+      animate={{ opacity: 1 }}
+      initial={{ opacity: 0 }}
+      exit={{ opacity: 0 }}
+      className={styles.card}
+    >
       <div className={styles.card__header}>
         <div className={styles.card__picture}>
           <div className={styles["card__picture-overlay"]}>&nbsp;</div>
@@ -80,7 +87,7 @@ const Card = ({
           Details
         </Link>
       </div>
-    </div>
+    </motion.div>
   );
 };
 
