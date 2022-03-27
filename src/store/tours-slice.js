@@ -4,6 +4,7 @@ const toursSlice = createSlice({
   name: "tours",
   initialState: {
     tours: [],
+    search: "",
   },
 
   reducers: {
@@ -23,6 +24,10 @@ const toursSlice = createSlice({
       const { newTour } = action.payload;
       const tours = state.tours.filter((tour) => tour._id !== newTour._id);
       state.tours = [...tours, newTour];
+    },
+    addSearchWord(state, action) {
+      const { searchWord } = action.payload;
+      state.search = searchWord;
     },
   },
 });

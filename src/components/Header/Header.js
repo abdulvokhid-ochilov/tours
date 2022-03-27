@@ -1,11 +1,19 @@
 import styles from "./Header.module.css";
-import { useSelector } from "react-redux";
-import { Link, NavLink } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
+import { toursActions } from "../../store/tours-slice";
+import { useRef } from "react";
 
 const Header = () => {
   const status = useSelector((state) => state.auth.loginStatus);
   const name = useSelector((state) => state.auth.user?.name);
   const photo = useSelector((state) => state.auth.user.photo);
+  const search = useRef();
+  const dispatch = useDispatch();
+
+  const searchHandler = () => {
+    dispatch(toursActions.addSearchWord({ searchWord: search.current.value }));
+  };
 
   return (
     <header className={styles["header"]}>
@@ -14,12 +22,14 @@ const Header = () => {
           All tours
         </Link>
         <form className={styles.nav__search}>
-          <button className={styles["nav__search-btn"]}>
+          <div className={styles["nav__search-btn"]}>
             <svg>
               <use href="img/icons.svg#icon-search"></use>
             </svg>
-          </button>
+          </div>
           <input
+            ref={search}
+            onChange={searchHandler}
             type="text"
             placeholder="Search tours"
             className={styles["nav__search-input"]}

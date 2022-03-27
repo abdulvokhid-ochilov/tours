@@ -11,12 +11,13 @@ import { useEffect } from "react";
 import { fetchUserProfile } from "./store/auth-actions";
 import { getAllUsers } from "./store/users-actions";
 import { getAllTours } from "./store/tours-actions";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import TourPage from "./pages/TourPage";
 
 function App() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const role = useSelector((state) => state.auth.user.role);
 
   useEffect(() => {
     const token = localStorage.getItem("toursUserToken");
@@ -25,7 +26,7 @@ function App() {
     }
 
     dispatch(getAllTours());
-    dispatch(getAllUsers(token));
+    if (role === "admin") dispatch(getAllUsers(token));
   }, []);
 
   return (
