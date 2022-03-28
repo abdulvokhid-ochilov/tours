@@ -13,11 +13,13 @@ import { getAllUsers } from "./store/users-actions";
 import { getAllTours } from "./store/tours-actions";
 import { useDispatch, useSelector } from "react-redux";
 import TourPage from "./pages/TourPage";
+import NotFound from "./pages/NotFound";
 
 function App() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const role = useSelector((state) => state.auth.user.role);
+  const status = useSelector((state) => state.auth.loginStatus);
 
   useEffect(() => {
     const token = localStorage.getItem("toursUserToken");
@@ -36,8 +38,12 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<SignUpPage />} />
-        <Route path="/account/*" element={<AccountPage />} />
+        <Route
+          path="/account/*"
+          element={status ? <AccountPage /> : <NotFound />}
+        />
         <Route path="/tour/:id" element={<TourPage />} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
 
       <ToastContainer
