@@ -3,6 +3,10 @@ import { useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { createNewTour } from "../../../../store/tours-actions";
+import Autocomplete from "react-google-autocomplete";
+import GoogleMapReact from "google-map-react";
+
+const key = process.env.REACT_APP_GOOGLE_MAPS_API_KEY;
 
 const CreateTour = () => {
   const dispatch = useDispatch();
@@ -12,6 +16,9 @@ const CreateTour = () => {
   const [tourImg1, setTourImg1] = useState({ src: null, file: null });
   const [tourImg2, setTourImg2] = useState({ src: null, file: null });
   const [tourImg3, setTourImg3] = useState({ src: null, file: null });
+  const [lat, setLat] = useState(37.4563);
+  const [lng, setLng] = useState(126.7052);
+  const [stops, setStops] = useState([]);
 
   const name = useRef();
   const duration = useRef();
@@ -19,8 +26,14 @@ const CreateTour = () => {
   const difficulty = useRef();
   const price = useRef();
   const date = useRef();
+  const place = useRef();
   const summary = useRef();
   const description = useRef();
+
+  const clearHandler = (e) => {
+    e.preventDefault();
+    setStops([]);
+  };
 
   const formSubmitHandler = (e) => {
     e.preventDefault();
@@ -119,6 +132,49 @@ const CreateTour = () => {
               className={styles["form__input"]}
               required
             />
+            <label className={styles["form__label"]} htmlFor="place">
+              Place
+            </label>
+            <Autocomplete
+              ref={place}
+              className={styles["form__input"]}
+              apiKey={key}
+              onPlaceSelected={(place) => {
+                setLat(place.geometry.location.lat());
+                setLng(place.geometry.location.lng());
+              }}
+            />
+            <label className={styles["form__label"]} htmlFor="map">
+              Click on the map to set the stops of the tour
+            </label>
+            <div className={styles.map}>
+              <GoogleMapReact
+                bootstrapURLKeys={{
+                  key: key,
+                  libraries: ["places"],
+                }}
+                center={[lat, lng]}
+                defaultZoom={12}
+                margin={[50, 50, 50, 50]}
+                onClick={({ lat, lng }) => {
+                  setStops([...stops, { lat, lng }]);
+                }}
+              >
+                {stops.map(({ lat, lng }, i) => (
+                  <div className={styles.marker} key={i} lat={lat} lng={lng}>
+                    🚩
+                  </div>
+                ))}
+              </GoogleMapReact>
+            </div>
+          </div>
+          <div className={`${styles["form__group"]} right`}>
+            <button
+              onClick={clearHandler}
+              className="btn btn--small btn--green"
+            >
+              Clear
+            </button>
           </div>
 
           <div className={`${styles["form__group"]} ma-bt-md"`}>
