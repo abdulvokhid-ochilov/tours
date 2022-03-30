@@ -1,6 +1,10 @@
 import styles from "./TourCTA.module.css";
+import { useState } from "react";
+import CheckoutForm from "../../Payment/CheckoutForm";
 
 const TourCTA = ({ images }) => {
+  const [isOpen, setIsOpen] = useState(false);
+
   return (
     <section className={styles["section-cta"]}>
       <div className={styles["cta"]}>
@@ -23,11 +27,15 @@ const TourCTA = ({ images }) => {
           <p className={styles["cta__text"]}>
             10 days. 1 adventure. Infinite memories. Make it yours today!
           </p>
-          <button className="btn btn--green span-all-rows">
+          <button
+            onClick={setIsOpen.bind(null, !isOpen)}
+            className="btn btn--green span-all-rows"
+          >
             Book tour now!
           </button>
         </div>
       </div>
+      {isOpen && <CheckoutForm />}
     </section>
   );
 };
