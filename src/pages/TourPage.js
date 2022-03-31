@@ -40,7 +40,7 @@ const TourPage = () => {
       <TourPictures images={tour.images} />
       <TourMap />
       <TourReviews />
-      <TourCTA images={tour.images} />
+      <TourCTA images={tour.images} tourId={id} />
     </>
   ) : (
     <div className="main">
