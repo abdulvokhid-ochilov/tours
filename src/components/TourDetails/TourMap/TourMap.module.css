@@ -12,15 +12,14 @@
 }
 
 .marker {
-  /* background-image: url("../img/pin.png"); */
-  background-size: cover;
-  width: 32px;
-  height: 40px;
-  cursor: pointer;
+  font-size: 3rem;
+  transform: translate(-100%, -100%);
 }
 
-.mapboxgl-popup {
-  max-width: 25rem;
+.marker:hover {
+  cursor: pointer;
+  transform: scale(1.2) translate(-100%, -100%);
+  transition: ease-in-out 0.3s;
 }
 
 .mapboxgl-popup-content {

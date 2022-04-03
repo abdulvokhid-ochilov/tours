@@ -1,8 +1,11 @@
 import styles from "./TourHeader.module.css";
 
-const TourHeader = ({ name, duration }) => {
+const TourHeader = ({ name, duration, location: { place }, cover }) => {
   return (
-    <section className={styles["section-header"]}>
+    <section
+      className={styles["section-header"]}
+      style={{ backgroundImage: `url(${cover})` }}
+    >
       <div className={styles["card__picture-overlay"]}>&nbsp;</div>
       <div className={styles["heading-box"]}>
         <h1 className="heading-primary">
@@ -19,7 +22,7 @@ const TourHeader = ({ name, duration }) => {
             <svg className={styles["heading-box__icon"]}>
               <use href="img/icons.svg#icon-map-pin"></use>
             </svg>
-            <span className={styles["heading-box__text"]}>Las Vegas, USA</span>
+            <span className={styles["heading-box__text"]}>{place}</span>
           </div>
         </div>
       </div>

@@ -13,8 +13,6 @@
     100% calc(100% - var(--section-rotate)),
     0 100%
   );
-
-  background-image: url("../../../../public/img/tours/tour-1-1.jpg");
   background-size: cover;
 }
 

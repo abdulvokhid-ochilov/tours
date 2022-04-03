@@ -4,8 +4,8 @@
   flex: 1;
   padding: 7rem;
   overflow: hidden;
-  height: 100vh;
   overflow-y: auto;
+  height: 100vh;
   margin-left: 25rem;
 }
 
@@ -41,8 +41,6 @@
   border-radius: 4px;
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
-  /* Pseudo element (a visible thing that isn't really in the DOM).
-            Also needs -ms- */
 }
 .form__input:focus {
   outline: none;
@@ -102,7 +100,7 @@
   height: 0.1px;
   opacity: 0;
   overflow: hidden;
-  position: absolute;
+  position: relative;
   z-index: -1;
 }
 
@@ -131,7 +129,7 @@
 }
 
 .map {
-  height: 50vh;
+  height: 40rem;
 }
 
 .marker {

@@ -3,6 +3,10 @@ import { useRef, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { updateTour } from "../../../../store/tours-actions";
+import Autocomplete from "react-google-autocomplete";
+import GoogleMapReact from "google-map-react";
+
+const key = process.env.REACT_APP_GOOGLE_MAPS_API_KEY;
 
 const EditTour = () => {
   const dispatch = useDispatch();
@@ -14,6 +18,9 @@ const EditTour = () => {
   const [tourImg1, setTourImg1] = useState({ src: null, file: null });
   const [tourImg2, setTourImg2] = useState({ src: null, file: null });
   const [tourImg3, setTourImg3] = useState({ src: null, file: null });
+  const [lat, setLat] = useState(37.4563);
+  const [lng, setLng] = useState(126.7052);
+  const [stops, setStops] = useState([]);
 
   const name_ = useRef();
   const duration_ = useRef();
@@ -23,6 +30,7 @@ const EditTour = () => {
   const date_ = useRef();
   const summary_ = useRef();
   const description_ = useRef();
+  const place_ = useRef();
 
   useEffect(() => {
     fetch(`http://localhost:5000/api/v1/tours/${id}`)
@@ -41,6 +49,8 @@ const EditTour = () => {
               description,
               images,
               imageCover,
+              location,
+              stops,
             },
           },
         }) => {
@@ -49,9 +59,14 @@ const EditTour = () => {
           groupSize_.current.value = maxGroupSize;
           difficulty_.current.value = difficulty;
           price_.current.value = price;
-          date_.current.value = startDates[0].split("T")[0];
+          date_.current.value = startDates.split("T")[0];
           summary_.current.value = summary;
           description_.current.value = description;
+          place_.current.value = location.place;
+          let tempArr = stops.map((stop) => JSON.parse(stop));
+          setStops(tempArr);
+          setLat(+location.lat);
+          setLng(+location.lng);
           setCoverImg({ src: imageCover, file: null });
           setTourImg1({ src: images[0], file: null });
           setTourImg2({ src: images[1], file: null });
@@ -78,7 +93,20 @@ const EditTour = () => {
     formData.append("images", tourImg3.file ? tourImg3.file : tourImg3.src);
     formData.append("startDates", date_.current.value);
 
+    stops.forEach((stop) => {
+      formData.append("stops", JSON.stringify(stop));
+    });
+
+    formData.append("location[place]", place_.current.value);
+    formData.append("location[lat]", lat);
+    formData.append("location[lng]", lng);
+
     dispatch(updateTour(formData, id, token, navigate));
+  };
+
+  const clearHandler = (e) => {
+    e.preventDefault();
+    setStops([]);
   };
 
   return (
@@ -158,6 +186,50 @@ const EditTour = () => {
               className={styles["form__input"]}
               required
             />
+            <label className={styles["form__label"]} htmlFor="place">
+              Place
+            </label>
+            <Autocomplete
+              ref={place_}
+              className={styles["form__input"]}
+              apiKey={key}
+              onPlaceSelected={(place) => {
+                setLat(place.geometry.location.lat());
+                setLng(place.geometry.location.lng());
+              }}
+            />
+          </div>
+          <label className={styles["form__label"]} htmlFor="map">
+            Click on the map to set the stops of the tour
+          </label>
+          <div className={styles.map}>
+            <GoogleMapReact
+              bootstrapURLKeys={{
+                key: key,
+                libraries: ["places"],
+              }}
+              center={[lat, lng]}
+              defaultZoom={14}
+              margin={[50, 50, 50, 50]}
+              onClick={({ lat, lng }) => {
+                setStops([...stops, { lat, lng }]);
+              }}
+            >
+              {stops.map(({ lat, lng }, i) => (
+                <div className={styles.marker} key={i} lat={lat} lng={lng}>
+                  🚩
+                </div>
+              ))}
+            </GoogleMapReact>
+          </div>
+
+          <div className={`${styles["form__group"]} right`}>
+            <button
+              onClick={clearHandler}
+              className="btn btn--small btn--green"
+            >
+              Clear
+            </button>
           </div>
 
           <div className={`${styles["form__group"]} ma-bt-md"`}>

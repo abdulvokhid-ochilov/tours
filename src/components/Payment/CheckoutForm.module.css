@@ -1,8 +1,5 @@
 .section-payment {
-  margin-top: calc(0px - var(--section-rotate));
-  padding: 3rem;
-  padding-bottom: 11rem;
-  padding-top: calc(15rem + var(--section-rotate));
+  padding-top: 8rem;
   background-color: #f7f7f7;
 }
 
@@ -12,8 +9,18 @@
   margin: 0 auto;
   overflow: hidden;
   background-color: #fff;
-  padding: 9rem 5rem 9rem 21rem;
+  padding: 5rem;
   border-radius: 2rem;
   -webkit-box-shadow: 0 3rem 8rem 0.5rem rgba(0, 0, 0, 0.15);
   box-shadow: 0 3rem 8rem 0.5rem rgba(0, 0, 0, 0.15);
+}
+
+.card {
+  margin: 2rem 0.6rem;
+}
+
+.card_label {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #55c57a;
 }

@@ -11,11 +11,11 @@ let stripePromise;
   );
 })();
 
-const TourCTA = ({ images, tourId }) => {
+const TourCTA = ({ images, tourId, duration }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <Elements stripe={stripePromise}>
+    <Elements stripe={stripePromise} className={styles.elements}>
       <section className={styles["section-cta"]}>
         <div className={styles["cta"]}>
           <div className={`${styles["cta__img"]} ${styles["cta__img--logo"]}`}>
@@ -35,7 +35,8 @@ const TourCTA = ({ images, tourId }) => {
           <div className={styles["cta__content"]}>
             <h2 className="heading-secondary">What are you waiting for?</h2>
             <p className={styles["cta__text"]}>
-              10 days. 1 adventure. Infinite memories. Make it yours today!
+              {duration} days. 1 adventure. Infinite memories. Make it yours
+              today!
             </p>
             <button
               onClick={setIsOpen.bind(null, !isOpen)}

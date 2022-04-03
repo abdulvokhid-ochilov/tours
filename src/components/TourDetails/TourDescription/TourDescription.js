@@ -4,7 +4,7 @@ const TourDescription = ({
   startDates,
   difficulty,
   maxGroupSize,
-  ratingsAverage,
+  ratingsAverage = 0,
   name,
   description,
 }) => {
@@ -20,7 +20,7 @@ const TourDescription = ({
               </svg>
               <span className={styles["overview-box__label"]}>Next date</span>
               <span className={styles["overview-box__text"]}>
-                {startDates[0]}
+                {new Date(startDates).toDateString()}
               </span>
             </div>
             <div className={styles["overview-box__detail"]}>

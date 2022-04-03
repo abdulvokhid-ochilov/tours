@@ -12,6 +12,10 @@ const Card = ({
   price,
   summary,
   imageCover,
+  maxGroupSize,
+  location,
+  startDates,
+  stops,
 }) => {
   return (
     <motion.div
@@ -26,7 +30,7 @@ const Card = ({
           <div className={styles["card__picture-overlay"]}>&nbsp;</div>
           <img
             src={imageCover}
-            alt="Tour 1"
+            alt=""
             className={styles["card__picture-img"]}
           />
         </div>
@@ -45,25 +49,25 @@ const Card = ({
           <svg className={styles["card__icon"]}>
             <use href="img/icons.svg#icon-map-pin"></use>
           </svg>
-          <span>Banff, Canada</span>
+          <span>{location.place}</span>
         </div>
         <div className={styles["card__data"]}>
           <svg className={styles["card__icon"]}>
             <use href="img/icons.svg#icon-calendar"></use>
           </svg>
-          <span>April 2021</span>
+          <span>{new Date(startDates).toDateString()}</span>
         </div>
         <div className={styles["card__data"]}>
           <svg className={styles["card__icon"]}>
             <use href="img/icons.svg#icon-flag"></use>
           </svg>
-          <span>3 stops</span>
+          <span>{stops.length} stops</span>
         </div>
         <div className={styles["card__data"]}>
           <svg className={styles["card__icon"]}>
             <use href="img/icons.svg#icon-user"></use>
           </svg>
-          <span>25 people</span>
+          <span>{maxGroupSize} people</span>
         </div>
       </div>
 

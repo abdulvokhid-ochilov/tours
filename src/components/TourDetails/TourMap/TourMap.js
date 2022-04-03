@@ -3,7 +3,7 @@ import GoogleMapReact from "google-map-react";
 
 const key = process.env.REACT_APP_GOOGLE_MAPS_API_KEY;
 
-const TourMap = () => {
+const TourMap = ({ location: { lat, lng }, stops }) => {
   return (
     <section className={styles["section-map"]}>
       <div id={styles["map"]}>
@@ -12,18 +12,20 @@ const TourMap = () => {
             key: key,
             libraries: ["places"],
           }}
-          center={[-33.918861, 18.4233]}
-          defaultZoom={12}
+          center={[+lat, +lng]}
+          defaultZoom={15}
           margin={[50, 50, 50, 50]}
-          // onClick={({ lat, lng }) => {
-          //   setStops([...stops, { lat, lng }]);
-          // }}
         >
-          {/* {stops.map(({ lat, lng }, i) => (
-                  <div className={styles.marker} key={i} lat={lat} lng={lng}>
-                    🚩
-                  </div>
-                ))} */}
+          {stops.map((stop, i) => (
+            <div
+              className={styles.marker}
+              key={i}
+              lat={JSON.parse(stop).lat}
+              lng={JSON.parse(stop).lng}
+            >
+              🚩
+            </div>
+          ))}
         </GoogleMapReact>
       </div>
     </section>

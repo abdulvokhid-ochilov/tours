@@ -28,11 +28,15 @@ const Tours = () => {
                 name,
                 duration,
                 difficulty,
-                ratingsAverage,
-                ratingsQuantity,
+                ratingsAverage = 0,
+                ratingsQuantity = 0,
                 price,
                 summary,
                 imageCover,
+                maxGroupSize,
+                location,
+                startDates,
+                stops,
               }) => (
                 <Card
                   key={_id}
@@ -45,6 +49,10 @@ const Tours = () => {
                   price={price}
                   summary={summary}
                   imageCover={imageCover}
+                  maxGroupSize={maxGroupSize}
+                  location={location}
+                  startDates={startDates}
+                  stops={stops}
                 />
               )
             )

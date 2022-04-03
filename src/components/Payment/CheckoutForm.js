@@ -2,6 +2,29 @@ import styles from "./CheckoutForm.module.css";
 import { useStripe, useElements, CardElement } from "@stripe/react-stripe-js";
 import { useSelector } from "react-redux";
 
+const cardElementOptions = {
+  style: {
+    base: {
+      iconColor: "#55c57a",
+      color: "#777",
+      fontWeight: "400",
+      fontFamily: "Roboto, Open Sans, Segoe UI, sans-serif",
+      fontSize: "19px",
+      fontSmoothing: "antialiased",
+      ":-webkit-autofill": {
+        color: "#55c57a",
+      },
+      "::placeholder": {
+        color: "#777",
+      },
+    },
+    invalid: {
+      iconColor: "#eb4d4b",
+      color: "#eb4d4b",
+    },
+  },
+};
+
 const CheckoutForm = ({ id }) => {
   const stripe = useStripe();
   const elements = useElements();
@@ -46,12 +69,19 @@ const CheckoutForm = ({ id }) => {
 
     console.log(paymentIntent);
   };
+
   return (
     <section className={styles["section-payment"]}>
       <div className={styles.payment}>
         <form onSubmit={handleSubmit}>
-          <label htmlFor="card">Card</label>
-          <CardElement id="card" />
+          <label htmlFor="card" className={styles.card_label}>
+            Card
+          </label>
+          <CardElement
+            id="card"
+            className={styles.card}
+            options={cardElementOptions}
+          />
           <button
             disabled={!stripe}
             className="btn btn--small btn--green right"

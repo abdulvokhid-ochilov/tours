@@ -4,6 +4,7 @@
   padding-bottom: 11rem;
   padding-top: calc(15rem + var(--section-rotate));
   background-color: #f7f7f7;
+  font-size: large;
 }
 
 .cta {

@@ -52,6 +52,14 @@ const CreateTour = () => {
     formData.append("images", tourImg3.file);
     formData.append("startDates", date.current.value);
 
+    stops.forEach((stop) => {
+      formData.append("stops", JSON.stringify(stop));
+    });
+
+    formData.append("location[place]", place.current.value);
+    formData.append("location[lat]", lat);
+    formData.append("location[lng]", lng);
+
     dispatch(createNewTour(formData, token, navigate));
   };
 
@@ -154,7 +162,7 @@ const CreateTour = () => {
                   libraries: ["places"],
                 }}
                 center={[lat, lng]}
-                defaultZoom={12}
+                defaultZoom={14}
                 margin={[50, 50, 50, 50]}
                 onClick={({ lat, lng }) => {
                   setStops([...stops, { lat, lng }]);

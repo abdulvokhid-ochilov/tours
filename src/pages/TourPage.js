@@ -28,7 +28,12 @@ const TourPage = () => {
 
   return tour ? (
     <>
-      <TourHeader name={tour.name} duration={tour.duration} />
+      <TourHeader
+        name={tour.name}
+        duration={tour.duration}
+        location={tour.location}
+        cover={tour.imageCover}
+      />
       <TourDescription
         startDates={tour.startDates}
         ratingsAverage={tour.ratingsAverage}
@@ -38,9 +43,9 @@ const TourPage = () => {
         difficulty={tour.difficulty}
       />
       <TourPictures images={tour.images} />
-      <TourMap />
+      <TourMap location={tour.location} stops={tour.stops} />
       <TourReviews />
-      <TourCTA images={tour.images} tourId={id} />
+      <TourCTA images={tour.images} tourId={id} duration={tour.duration} />
     </>
   ) : (
     <div className="main">
