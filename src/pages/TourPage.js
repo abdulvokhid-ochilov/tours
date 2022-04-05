@@ -17,12 +17,19 @@ const override = css`
 const TourPage = () => {
   const id = useParams().id;
   const [tour, setTour] = useState(null);
+  const [reviews, setReviews] = useState([]);
 
   useEffect(() => {
     fetch(`http://localhost:5000/api/v1/tours/${id}`)
       .then((results) => results.json())
       .then((data) => {
         setTour(data.data.tour);
+      });
+
+    fetch(`http://localhost:5000/api/v1/tours/${id}/reviews`)
+      .then((results) => results.json())
+      .then((data) => {
+        setReviews(data.data.reviews);
       });
   }, [id]);
 
@@ -44,7 +51,7 @@ const TourPage = () => {
       />
       <TourPictures images={tour.images} />
       <TourMap location={tour.location} stops={tour.stops} />
-      <TourReviews />
+      <TourReviews reviews={reviews} />
       <TourCTA images={tour.images} tourId={id} duration={tour.duration} />
     </>
   ) : (
