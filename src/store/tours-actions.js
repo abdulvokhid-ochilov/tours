@@ -128,7 +128,7 @@ export const getAllTours = () => {
       });
 
       if (!response.ok) {
-        throw new Error("Getting toura failed.");
+        throw new Error("Getting tours failed.");
       }
 
       const data = await response.json();

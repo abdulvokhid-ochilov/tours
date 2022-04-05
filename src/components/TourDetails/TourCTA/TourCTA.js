@@ -11,7 +11,7 @@ let stripePromise;
   );
 })();
 
-const TourCTA = ({ images, tourId, duration }) => {
+const TourCTA = ({ images, tour, duration }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
@@ -46,7 +46,7 @@ const TourCTA = ({ images, tourId, duration }) => {
             </button>
           </div>
         </div>
-        {isOpen && <CheckoutForm id={tourId} />}
+        {isOpen && <CheckoutForm tour={tour} />}
       </section>
     </Elements>
   );

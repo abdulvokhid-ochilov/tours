@@ -1,12 +1,18 @@
 import styles from "./ManageUsers.module.css";
 import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
-import { deleteUser } from "../../../../store/users-actions";
+import { deleteUser, getAllUsers } from "../../../../store/users-actions";
+import { useEffect } from "react";
 
 const ManageUsers = () => {
   const dispatch = useDispatch();
   const users = useSelector((state) => state.users.users);
   const token = useSelector((state) => state.auth.token);
+  const role = useSelector((state) => state.auth.user.role);
+
+  useEffect(() => {
+    role === "admin" && dispatch(getAllUsers(token));
+  }, [role, token, dispatch]);
 
   const deleteHandler = (id) => {
     dispatch(deleteUser(id, token));

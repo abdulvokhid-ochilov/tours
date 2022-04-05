@@ -9,16 +9,16 @@ import "react-toastify/dist/ReactToastify.css";
 import AccountPage from "./pages/AccountPage";
 import { useEffect } from "react";
 import { fetchUserProfile } from "./store/auth-actions";
-import { getAllUsers } from "./store/users-actions";
 import { getAllTours } from "./store/tours-actions";
 import { useDispatch, useSelector } from "react-redux";
 import TourPage from "./pages/TourPage";
 import NotFound from "./pages/NotFound";
+import { getAllBookings } from "./store/bookings-actions";
 
 function App() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const role = useSelector((state) => state.auth.user.role);
+
   const status = useSelector((state) => state.auth.loginStatus);
 
   useEffect(() => {
@@ -28,7 +28,7 @@ function App() {
     }
 
     dispatch(getAllTours());
-    if (role === "admin") dispatch(getAllUsers(token));
+    dispatch(getAllBookings(token));
   }, []);
 
   return (
