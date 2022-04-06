@@ -62,6 +62,7 @@ const CheckoutForm = ({ tour }) => {
         render: "Could not complete payment!",
         type: "error",
         isLoading: false,
+        autoClose: 3000,
       });
     }
 
@@ -76,6 +77,7 @@ const CheckoutForm = ({ tour }) => {
         render: "Could not complete payment!",
         type: "error",
         isLoading: false,
+        autoClose: 3000,
       });
     }
 

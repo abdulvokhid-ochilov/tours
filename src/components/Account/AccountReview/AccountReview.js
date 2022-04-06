@@ -1,41 +1,75 @@
 import styles from "./AccountReview.module.css";
-import { useState } from "react";
+import { useState, useRef } from "react";
+import { useSelector } from "react-redux";
+import { toast } from "react-toastify";
 
 const AccountReview = () => {
+  const tour = useRef(null);
+  const feedback = useRef(null);
   const [rate, setRate] = useState(0);
+  const { bookings } = useSelector((state) => state.bookings);
+  const { token } = useSelector((state) => state.auth);
 
   const clickHandler = (e) => {
     setRate(e.target.id);
+  };
+
+  const submitHandler = async (e) => {
+    e.preventDefault();
+    const toastId = toast.loading("Please wait...");
+
+    const response = await fetch(
+      `http://localhost:5000/api/v1/tours/${tour.current.value}/reviews`,
+      {
+        method: "POST",
+        body: JSON.stringify({
+          review: feedback.current.value,
+          rating: rate,
+        }),
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    ).then((res) => res.json());
+
+    response.status === "success"
+      ? toast.update(toastId, {
+          render: "Feedback submitted successfully!",
+          type: "success",
+          isLoading: false,
+          autoClose: 3000,
+        })
+      : toast.update(toastId, {
+          render: response.message,
+          type: "error",
+          isLoading: false,
+          autoClose: 3000,
+        });
+    setRate(0);
+    feedback.current.value = "";
   };
   return (
     <div className={styles["user-view__content"]}>
       <div className={styles["user-view__form-container"]}>
         <h2 className="heading-secondary ma-bt-md">Leave your feedback</h2>
-        <form>
+        <form onSubmit={submitHandler}>
           <div className={styles["form__group"]}>
             <label className={styles["form__label"]} htmlFor="tours">
               Your Tours
             </label>
             <select
+              ref={tour}
               name="tours"
               className={`${styles["form__input"]} ${styles["form__select"]}`}
               id="tours-select"
+              required
             >
-              <option value="" className="options">
-                --Please choose a tour--
-              </option>
-              <option value="1" className="options">
-                The sea explorer
-              </option>
-              <option value="2" className="options">
-                The forest hiker
-              </option>
-              <option value="3" className="options">
-                The park camper
-              </option>
-              <option value="4" className="options">
-                The city wanderer
-              </option>
+              {bookings.map(({ tour: { _id, name } }, i) => (
+                <option key={i} value={_id} className="options">
+                  {name}
+                </option>
+              ))}
             </select>
           </div>
           <div className={`${styles["form__group"]} ma-bt-md"`}>
@@ -106,16 +140,16 @@ const AccountReview = () => {
             </label>
 
             <textarea
+              ref={feedback}
               className={styles["form__input"]}
               id={styles["feedback"]}
               type="text"
-              required="required"
+              required
               name="feedback"
               rows="5"
               cols="33"
-            >
-              Leave your feedback on the selected tour...
-            </textarea>
+              defaultValue="Leave your feedback on the selected tour..."
+            ></textarea>
           </div>
 
           <div className={`${styles["form__group"]} right`}>
